@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== FONT DECLARATIONS ========== */
+@font-face {
+  font-family: 'Countach-Regular';
+  src: url('/fonts/Countach_Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Countach-Light';
+  src: url('/fonts/Countach_Light_Regular.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Countach-Bold';
+  src: url('/fonts/Countach_Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Countach-Bold-Italic';
+  src: url('/fonts/Countach_Bold_Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Countach-Italic';
+  src: url('/fonts/Countach_Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Countach-Light-Italic';
+  src: url('/fonts/Countach_Light_Italic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ========== ROOT FONT SIZE ========== */
+/*
+  Mobile (≤768px) : always 16px — browser handles it fine
+  Desktop 100%    : fluid clamp
+  Desktop 125%    : slight compensation
+  Desktop 150%    : slight compensation
+  Desktop 175%+   : NO intervention — let the browser zoom naturally
+*/
+
+/* Mobile: locked */
+:root {
+  font-size: 16px;
+}
+
+/* Desktop base: fluid */
+@media (min-width: 769px) {
+  :root {
+    font-size: clamp(12px, 0.833vw, 16px);
+  }
+}
+
+/* Windows 125% — desktop only */
+@media (min-width: 769px) and (min-resolution: 120dpi) and (max-resolution: 143dpi) {
+  :root {
+    font-size: clamp(11px, 0.73vw, 14px);
+  }
+}
+
+/* Windows 150% — desktop only */
+@media (min-width: 769px) and (min-resolution: 144dpi) and (max-resolution: 167dpi) {
+  :root {
+    font-size: clamp(10px, 0.65vw, 13px);
+  }
+}
+
+/*
+  175% and 200%: intentionally omitted.
+  At this level the user wants bigger content — let the browser zoom.
+  Our layout is fluid enough to handle it naturally.
+*/
+
+/* ========== CSS RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Countach-Regular', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

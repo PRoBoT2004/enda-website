@@ -1,0 +1,53 @@
+/*
+  ============================================================
+  STICKY HERO
+  - Image sticks at top:0 while user scrolls
+  - StorySection slides up over it (z-index handled there)
+  - When swapping to video: replace <Image> with <video> inside
+    .stickyHero — zero restructuring needed
+  ============================================================
+*/
+
+/* Wrapper defines the scroll distance the sticky stays active */
+/* 200vh = image is sticky for one full viewport of scrolling */
+.stickyWrapper {
+  position: relative;
+  height: 200vh;
+  z-index: 0;
+}
+
+.stickyHero {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ============================================================
+   MOBILE ≤768px — still sticky but shorter scroll duration
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Less scroll distance on mobile — feels snappier */
+  .stickyWrapper {
+    height: 160vh;
+  }
+}
+
+/* ============================================================
+   MOBILE ≤480px
+   ============================================================ */
+@media (max-width: 480px) {
+  .stickyWrapper {
+    height: 140vh;
+  }
+
+  .img {
+    object-position: center top;
+  }
+}

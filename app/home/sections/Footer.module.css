@@ -1,0 +1,347 @@
+/*
+  ============================================================
+  FOOTER — Figma group-76
+  bg: #f8f8f8, height 424px at 1920px
+  Layout: brand col (left ~25%) | 4 link cols | newsletter col (right ~25%)
+  Bottom bar: locale/copyright left | payment icons right
+  ============================================================
+*/
+
+.footer {
+    width: 100%;
+    background: #f8f8f8;
+}
+
+/* ============================================================
+   MAIN CONTENT ROW
+   6 columns: brand | shop | company | services | legal | newsletter
+   Figma: brand ~25vw, each link col ~10vw, newsletter ~25vw
+   ============================================================ */
+.main {
+    display: grid;
+    grid-template-columns: clamp(160px, 24vw, 460px) repeat(4, 1fr) clamp(200px, 27vw, 520px);
+    align-items: start;
+    padding: clamp(2rem, 3.75vw, 4rem) clamp(1.5rem, 2.6vw, 3rem);
+    gap: 0 clamp(0.5rem, 1.5vw, 2rem);
+}
+
+/* ============================================================
+   BRAND COLUMN
+   ============================================================ */
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.25vw, 1.5rem);
+    padding-right: clamp(1rem, 3vw, 4rem);
+}
+
+.logoWrap {
+    position: relative;
+    width: clamp(100px, 7.76vw, 149px);
+    aspect-ratio: 149 / 101;
+}
+
+.logoImg {
+    object-fit: contain;
+    object-position: left center;
+}
+
+.tagline {
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.75rem, 1.04vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.bcorp {
+    position: relative;
+    width: clamp(80px, 8.23vw, 158px);
+    aspect-ratio: 158 / 77;
+}
+
+.bcorpImg {
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* ============================================================
+   LINK COLUMNS (Shop, Company, Services, Legal)
+   ============================================================ */
+.linkCol {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.4rem, 0.8vw, 1rem);
+}
+
+/* Column heading — ConcertOne/Countach, 22px at 1920 */
+.colHead {
+    color: #4d4d4d;
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(0.75rem, 1.15vw, 1.375rem);
+    letter-spacing: 0.05em;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 clamp(0.25rem, 0.5vw, 0.75rem) 0;
+}
+
+/* Links — 20px at 1920 */
+.link {
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.6875rem, 1.04vw, 1.25rem);
+    font-weight: 400;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    transition: opacity 0.2s ease;
+}
+
+.link:hover {
+    opacity: 0.6;
+}
+
+/* ============================================================
+   NEWSLETTER COLUMN
+   ============================================================ */
+.newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.25vw, 1.5rem);
+}
+
+/* Email input row */
+.inputRow {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1.23px solid #e1e1e1;
+    padding-bottom: clamp(0.3rem, 0.5vw, 0.6rem);
+    gap: 0.5rem;
+}
+
+.emailInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(77, 77, 77, 0.6);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.6875rem, 1.04vw, 1.25rem);
+    font-weight: 400;
+    padding: 0;
+}
+
+.emailInput::placeholder {
+    color: rgba(77, 77, 77, 0.6);
+}
+
+.subscribeBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.6875rem, 1.04vw, 1.25rem);
+    font-weight: 400;
+    padding: 0;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.subscribeBtn:hover { opacity: 0.6; }
+
+/* Social icons row */
+.social {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 1.25vw, 1.5rem);
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.socialLink:hover { opacity: 1; }
+
+.socialLink svg {
+    width: clamp(16px, 1.2vw, 22px);
+    height: clamp(16px, 1.2vw, 22px);
+}
+
+/* ============================================================
+   BOTTOM BAR
+   ============================================================ */
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(0.75rem, 1.5vw, 1.5rem) clamp(1.5rem, 2.6vw, 3rem);
+    border-top: 1px solid rgba(77, 77, 77, 0.1);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.bottomLeft {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.4rem, 0.75vw, 1rem);
+    flex-wrap: wrap;
+}
+
+.bottomText {
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.625rem, 0.833vw, 1rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.separator {
+    color: rgba(77, 77, 77, 0.4);
+    font-size: clamp(0.625rem, 0.833vw, 1rem);
+}
+
+/* Payment icons */
+.payments {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.4rem, 0.75vw, 1rem);
+}
+
+.payIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.5rem, 0.625vw, 0.75rem);
+    font-weight: 700;
+    color: #4d4d4d;
+    letter-spacing: 0.02em;
+    min-width: clamp(30px, 2.6vw, 50px);
+    height: clamp(18px, 1.6vw, 31px);
+}
+
+/* ============================================================
+   1366px
+   ============================================================ */
+@media (max-width: 1366px) {
+    .main {
+        grid-template-columns: clamp(140px, 22vw, 380px) repeat(4, 1fr) clamp(180px, 25vw, 420px);
+    }
+}
+
+/* ============================================================
+   1024px — compress link cols
+   ============================================================ */
+@media (max-width: 1024px) {
+    .main {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem);
+    }
+
+    .brand {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding-right: 0;
+    }
+
+    .tagline {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .newsletter {
+        grid-column: 1 / -1;
+    }
+}
+
+/* ============================================================
+   MOBILE ≤768px
+   ============================================================ */
+@media (max-width: 768px) {
+    .main {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 20px;
+        padding: 32px 20px;
+    }
+
+    .brand {
+        grid-column: 1 / -1;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .newsletter {
+        grid-column: 1 / -1;
+    }
+
+    .logoWrap {
+        width: 100px;
+    }
+
+    .bcorp {
+        width: 80px;
+    }
+
+    .colHead { font-size: 14px; }
+    .link { font-size: 13px; }
+    .tagline { font-size: 13px; }
+    .emailInput,
+    .subscribeBtn { font-size: 13px; }
+
+    .bottom {
+        padding: 16px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .bottomText,
+    .separator { font-size: 12px; }
+}
+
+/* ============================================================
+   MOBILE ≤480px
+   ============================================================ */
+@media (max-width: 480px) {
+    .main {
+        grid-template-columns: 1fr 1fr;
+        padding: 24px 16px;
+        gap: 24px 16px;
+    }
+
+    .bottom {
+        padding: 16px;
+    }
+
+    .payments {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+}
+
+/* ============================================================
+   4K ≥2560px
+   ============================================================ */
+@media (min-width: 2560px) {
+    .colHead { font-size: 1.375rem; }
+    .link { font-size: 1.25rem; }
+    .tagline { font-size: 1.25rem; }
+    .emailInput, .subscribeBtn { font-size: 1.25rem; }
+    .bottomText, .separator { font-size: 1rem; }
+}

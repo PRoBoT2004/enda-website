@@ -1,0 +1,255 @@
+/*
+  ============================================================
+  SHOP SECTION
+  Desktop: 3 equal columns, fade in on scroll (staggered)
+  Mobile:  horizontal scroll — swipeable cards, compact
+  ============================================================
+*/
+
+/* Spacer only used in mobile horizontal scroll — hidden on desktop */
+.scrollSpacer {
+  display: none;
+}
+
+
+.shopSection {
+  width: 100%;
+  background: #ffffff;
+  margin-top: 4rem;
+  padding: 0 clamp(1rem, 2.5vw, 2rem);
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+/* ========== GRID ========== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* ========== COLUMN — fade in animation ========== */
+.column {
+  display: flex;
+  flex-direction: column;
+
+  /* Initial state: invisible, slightly below */
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* Triggered by IntersectionObserver */
+.column.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== HEADER ========== */
+.columnHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: clamp(0.5rem, 1vw, 0.875rem);
+}
+
+.title {
+  color: #4d4d4d;
+  font-family: 'Countach-Regular', sans-serif;
+  font-size: clamp(1.25rem, 1.9vw, 2.1875rem);
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.shopAllLink {
+  color: #4d4d4d;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(0.75rem, 1.1vw, 1.25rem);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.28px solid #4d4d4d;
+  padding-bottom: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+  align-self: flex-end;
+}
+
+.shopAllLink:hover {
+  opacity: 0.6;
+}
+
+/* ========== IMAGE ========== */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 591 / 768;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.imageWrapper:hover .image {
+  transform: scale(1.03);
+}
+
+/* ========== DESCRIPTION ========== */
+.description {
+  color: #4d4d4d;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(0.75rem, 1.25vw, 1.5rem);
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  padding-top: clamp(0.5rem, 1vw, 0.875rem);
+}
+
+/* ============================================================
+   1366px
+   ============================================================ */
+@media (max-width: 1366px) {
+  .title       { font-size: clamp(1.125rem, 1.7vw, 1.875rem); }
+  .shopAllLink { font-size: clamp(0.6875rem, 1vw, 1.125rem); }
+  .description { font-size: clamp(0.6875rem, 1.1vw, 1.25rem); }
+}
+
+/* ============================================================
+   1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+  .shopSection {
+    padding: 0 clamp(0.875rem, 2vw, 1.5rem);
+    padding-bottom: clamp(2rem, 4vw, 4rem);
+    margin-top: 3rem;
+  }
+
+  .grid        { gap: clamp(0.625rem, 1.2vw, 1.25rem); }
+  .title       { font-size: clamp(1rem, 1.5vw, 1.5rem); }
+  .shopAllLink { font-size: clamp(0.625rem, 0.9vw, 1rem); }
+  .description { font-size: clamp(0.625rem, 1vw, 1rem); }
+}
+
+/* ============================================================
+   MOBILE ≤768px
+   Horizontal scroll — premium swipeable cards
+   Each card ~75vw wide so next card peeks = invitation to scroll
+   ============================================================ */
+@media (max-width: 768px) {
+  .shopSection {
+    margin-top: 0;
+    padding: 0 0 40px 0;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    gap: 12px;
+    padding: 24px 0 8px 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Spacer gives first and last card breathing room */
+  .scrollSpacer {
+    display: block;
+    flex: 0 0 20px;
+    min-width: 20px;
+  }
+
+  .column {
+    /* Fixed width card — 75vw so next card peeks at right */
+    flex: 0 0 72vw;
+    max-width: 280px;
+    scroll-snap-align: start;
+    /* Reset fade — use simpler opacity for mobile */
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .column:last-child {
+    margin-right: 20px;
+  
+    opacity: 1;
+    transform: none;
+  }
+
+  .columnHeader {
+    padding-bottom: 8px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .shopAllLink {
+    font-size: 12px;
+  }
+
+  /* Shorter portrait image on mobile cards */
+  .imageWrapper {
+    aspect-ratio: 3 / 4;
+  }
+
+  .description {
+    font-size: 12px;
+    padding-top: 8px;
+    line-height: 1.5;
+  }
+}
+
+/* ============================================================
+   MOBILE ≤480px — slightly narrower cards
+   ============================================================ */
+@media (max-width: 480px) {
+  .column {
+    flex: 0 0 78vw;
+    max-width: 260px;
+  }
+
+  .grid {
+    padding: 20px 0 8px 0;
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 11px;
+  }
+}
+
+/* ============================================================
+   4K ≥2560px
+   ============================================================ */
+@media (min-width: 2560px) {
+  .title       { font-size: 2.1875rem; }
+  .shopAllLink { font-size: 1.25rem; }
+  .description { font-size: 1.5rem; }
+  .grid        { gap: 2rem; }
+}

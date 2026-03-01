@@ -1,0 +1,408 @@
+.section {
+    width: 100%;
+    background: #ffffff;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   TOP HALF
+   3 cols: labelCol | contentCol | portraitCol
+   labelCol has OUR STORY at top, OUR COMMUNITY aligned to communityBlock
+   Trick: use subgrid rows OR match padding manually
+   Best approach: make topHalf a CSS grid with 2 rows x 3 cols
+   Row1: OUR STORY label | story content | portrait (spans both rows)
+   Row2: OUR COMMUNITY label | community content | (portrait spans)
+   ============================================================ */
+.topHalf {
+    display: grid;
+    grid-template-columns: clamp(160px, 24vw, 462px) 1fr clamp(150px, 16.4vw, 315px);
+    grid-template-rows: auto auto;
+    padding: clamp(1.5rem, 3.5vw, 3.5rem) clamp(1.5rem, 2.55vw, 2.6rem);
+    gap: clamp(1.5rem, 3vw, 3rem) 0;
+}
+
+/* Row 1, Col 1 */
+.storyLabel {
+    grid-column: 1;
+    grid-row: 1;
+    padding-right: clamp(1rem, 2vw, 2rem);
+    padding-top: 0.1rem;
+}
+
+/* Row 2, Col 1 */
+.communityLabel {
+    grid-column: 1;
+    grid-row: 2;
+    padding-right: clamp(1rem, 2vw, 2rem);
+    padding-top: 0.1rem;
+}
+
+/* Row 1, Col 2 */
+.storyContent {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(0.4rem, 0.7vw, 0.875rem);
+    padding-right: clamp(1rem, 2vw, 2rem);
+}
+
+/* Row 2, Col 2 */
+.communityContent {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    padding-right: clamp(1rem, 2vw, 2rem);
+}
+
+/* Portrait spans both rows, Col 3 */
+.portraitCol {
+    grid-column: 3;
+    grid-row: 1 / 3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.portraitWrap {
+    position: relative;
+    width: clamp(140px, 13.8vw, 265px);
+    aspect-ratio: 265 / 398;
+    overflow: hidden;
+}
+
+/* ============================================================
+   SHARED — Section Heading (Countach-Regular, 35px at 1920)
+   ============================================================ */
+.label {
+    color: #4d4d4d;
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(1rem, 1.823vw, 2.1875rem);
+    letter-spacing: 0.05em;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0;
+}
+
+/* ============================================================
+   BODY TEXT — 24px at 1920
+   ============================================================ */
+.body {
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.8125rem, 1.25vw, 1.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* ============================================================
+   CTA LINK — underline exactly text width
+   ============================================================ */
+.cta {
+    display: inline-block;
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.6875rem, 1.04vw, 1.25rem);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1.28px solid #4d4d4d;
+    line-height: 1.95;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   META BLOCKS
+   ============================================================ */
+.metaBlock {
+    margin-top: clamp(0.6rem, 1.1vw, 1.4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.metaLabel {
+    color: #4d4d4d;
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(0.75rem, 1.46vw, 1.75rem);
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    margin: 0;
+}
+
+.metaNames {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: clamp(0.25rem, 0.5vw, 0.6rem);
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.75rem, 1.25vw, 1.5rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.dot { color: #b2b2b2; }
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+.divider {
+    width: 100%;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+/* ============================================================
+   BOTTOM HALF — 50% Journal | 50% Find Us
+   ============================================================ */
+.bottomHalf {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    padding: clamp(1.5rem, 3.5vw, 3.5rem) clamp(1.5rem, 2.55vw, 2.6rem);
+    gap: 0 clamp(1rem, 2vw, 3rem);
+}
+
+.colHead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.5rem);
+}
+
+/* ── JOURNAL ── */
+.journalCol {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 430×296px each, 34px gap at 1920 = 1.77vw */
+.journalImgs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(8px, 1.77vw, 34px);
+}
+
+.journalImg {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 430 / 296;
+    overflow: hidden;
+}
+
+.journalCaps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(8px, 1.77vw, 34px);
+    margin-top: clamp(0.5rem, 1vw, 1.25rem);
+}
+
+.cap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.capTitle {
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.6875rem, 1.04vw, 1.25rem);
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.capMeta {
+    color: #4d4d4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.5625rem, 0.83vw, 1rem);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* ── FIND US ── */
+.findUsCol {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 894×480px at 1920 */
+.locationWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 894 / 480;
+    overflow: hidden;
+}
+
+.locOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(77, 77, 77, 0.2);
+    z-index: 1;
+}
+
+.locText {
+    position: absolute;
+    bottom: clamp(0.75rem, 1.5vw, 1.75rem);
+    left: clamp(0.75rem, 1.5vw, 1.75rem);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.locCity {
+    color: #ffffff;
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(0.875rem, 1.46vw, 1.75rem);
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.locAddr {
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(0.6875rem, 1.04vw, 1.25rem);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+
+.imgCover {
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Hidden on desktop, shown on mobile only */
+.mobileLabel {
+    display: none;
+}
+
+/* ============================================================
+   1366px
+   ============================================================ */
+@media (max-width: 1366px) {
+    .topHalf {
+        grid-template-columns: clamp(140px, 22vw, 380px) 1fr clamp(140px, 15vw, 265px);
+    }
+}
+
+/* ============================================================
+   1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+    .topHalf {
+        grid-template-columns: clamp(130px, 20vw, 280px) 1fr clamp(120px, 14vw, 200px);
+    }
+
+    .bottomHalf {
+        grid-template-columns: 1fr;
+        gap: 2rem 0;
+    }
+}
+
+/* ============================================================
+   MOBILE ≤768px
+   Order: OUR STORY label → story text → OUR COMMUNITY label → community text → portrait
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Switch to flexbox so order property works */
+    .topHalf {
+        display: flex;
+        flex-direction: column;
+        padding: 32px 20px;
+        gap: 0;
+    }
+
+    /* Desktop label cols hidden — mobileLabel inside content takes over */
+    .storyLabel    { display: none; }
+    .communityLabel { display: none; }
+
+    /* Explicit order: story first, community second, portrait last */
+    .storyContent     { order: 1; padding-right: 0; gap: 10px; margin-bottom: 28px; }
+    .communityContent { order: 2; padding-right: 0; }
+    .portraitCol      { order: 3; grid-column: unset; grid-row: unset; justify-content: flex-start; margin-top: 28px; padding-right: 0; }
+
+    .portraitWrap { width: 55vw; }
+
+    /* Show mobile labels — each sits above its own content block */
+    .mobileLabel {
+        display: block;
+        color: #4d4d4d;
+        font-family: 'Countach-Regular', sans-serif;
+        font-size: 20px;
+        letter-spacing: 0.05em;
+        font-weight: 400;
+        text-transform: uppercase;
+        line-height: 1.05;
+        margin: 0 0 12px 0;
+    }
+
+    .bottomHalf {
+        grid-template-columns: 1fr;
+        padding: 32px 20px;
+        gap: 32px 0;
+    }
+
+    .journalImgs,
+    .journalCaps { gap: 12px; }
+
+    .journalCaps { grid-template-columns: 1fr; }
+
+    .label      { font-size: 20px; }
+    .body       { font-size: 14px; }
+    .cta        { font-size: 13px; }
+    .metaLabel  { font-size: 14px; }
+    .metaNames  { font-size: 13px; }
+    .capTitle   { font-size: 13px; }
+    .capMeta    { font-size: 11px; }
+    .locCity    { font-size: 15px; }
+    .locAddr    { font-size: 13px; }
+}
+
+/* ============================================================
+   MOBILE ≤480px
+   ============================================================ */
+@media (max-width: 480px) {
+    .topHalf,
+    .bottomHalf {
+        padding: 24px 16px;
+    }
+
+    .portraitWrap {
+        width: 60vw;
+    }
+
+    .label  { font-size: 18px; }
+    .body   { font-size: 13px; }
+}
+
+/* ============================================================
+   4K ≥2560px
+   ============================================================ */
+@media (min-width: 2560px) {
+    .label      { font-size: 2.1875rem; }
+    .body       { font-size: 1.5rem; }
+    .cta        { font-size: 1.25rem; }
+    .metaLabel  { font-size: 1.75rem; }
+    .metaNames  { font-size: 1.5rem; }
+    .capTitle   { font-size: 1.25rem; }
+    .capMeta    { font-size: 1rem; }
+    .locCity    { font-size: 1.75rem; }
+    .locAddr    { font-size: 1.25rem; }
+}

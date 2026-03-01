@@ -1,0 +1,95 @@
+/*
+  ============================================================
+  SHOWCASE SECTION
+  Figma: 4 images in 2×2 grid, each 960×610px at 1920px
+  No text, no overlays — pure photography
+  ============================================================
+*/
+
+.showcaseSection {
+  width: 100%;
+  background: #000000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.showcaseSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   GRID — 2 columns, 2 rows, zero gap (flush edges)
+   ============================================================ */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0;
+  width: 100%;
+}
+
+/* Each cell — aspect ratio 960/610 from Figma */
+.cell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 960 / 610;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  object-position: center center;
+  transition: transform 0.6s ease;
+}
+
+/* Subtle hover zoom — premium feel */
+.cell:hover .img {
+  transform: scale(1.03);
+}
+
+/* ============================================================
+   1366px — grid naturally scales, nothing to override
+   ============================================================ */
+
+/* ============================================================
+   1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+  /* Still 2×2 — photos are wide enough to look good */
+  .img {
+    object-position: center center;
+  }
+}
+
+/* ============================================================
+   MOBILE ≤768px — keep 2×2, taller aspect ratio for portrait feel
+   ============================================================ */
+@media (max-width: 768px) {
+  .cell {
+    /* Taller crop on mobile — each image fills more vertical space */
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Disable hover zoom on touch devices */
+  .cell:hover .img {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   MOBILE ≤480px
+   ============================================================ */
+@media (max-width: 480px) {
+  .cell {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ============================================================
+   4K ≥2560px — grid still scales perfectly via 1fr
+   ============================================================ */
+@media (min-width: 2560px) {
+  /* No overrides needed — 1fr handles it */
+}

@@ -1,0 +1,304 @@
+/*
+  ============================================================
+  FEATURED SECTION — Figma specs:
+  - Section: full width, white bg, padding top/bottom
+  - Left:  960px wide image, 690px tall, text overlay bottom-left
+  - Right: square gray product card, centered, sale tag inside
+  - Both sides equal width (50/50), vertically centered
+  ============================================================
+*/
+
+.featuredSection {
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: clamp(2rem, 5vw, 5rem) 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.featuredSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   LEFT — editorial image, NOT full height
+   960px wide at 1920px = exactly 50% width
+   690px tall at 1920px = ~35.9vw height
+   ============================================================ */
+.left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.editorialWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 960 / 690;
+  overflow: hidden;
+}
+
+.editorialImg {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.editorialOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  z-index: 1;
+}
+
+.editorialText {
+  position: absolute;
+  bottom: clamp(1rem, 3vw, 3.75rem);
+  left: clamp(1rem, 3vw, 3rem);
+  right: clamp(1rem, 3vw, 3rem);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(0.75rem, 1.25vw, 1.5rem);
+  line-height: 1.5;
+  font-weight: 400;
+  z-index: 2;
+  margin: 0;
+}
+
+/* ============================================================
+   RIGHT — product showcase, centered
+   ============================================================ */
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(1.5rem, 3vw, 4rem);
+  gap: clamp(0.75rem, 1.2vw, 1.25rem);
+}
+
+/* Square gray card — 440px at 1920px = 22.9vw */
+.productCard {
+  position: relative;
+  width: 100%;
+  max-width: clamp(260px, 22.9vw, 440px);
+  aspect-ratio: 1 / 1;
+  background: #ececec;
+  overflow: hidden;
+}
+
+/* Sale tag — ~18px at 1920px (18/1920 = 0.9375vw) */
+.saleTag {
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  color: #4d4d4d;
+  font-family: 'Countach-Light', sans-serif;
+  font-size: clamp(0.875rem, 0.9375vw, 1.125rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  z-index: 2;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+/* Shoe image — centered in card */
+.productImageWrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.productImage {
+  object-fit: contain;
+  object-position: center center;
+  padding: 10%;
+}
+
+/* Product info — must match card width exactly */
+.productInfo {
+  width: 100%;
+  max-width: clamp(260px, 22.9vw, 440px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.productName {
+  color: #4d4d4d;
+  font-family: 'Countach-Light', sans-serif;
+  font-size: clamp(0.75rem, 1.1vw, 1.375rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.priceWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.originalPrice {
+  color: #999999;
+  font-family: 'Countach-Regular', sans-serif;
+  font-size: clamp(0.75rem, 1.1vw, 1.375rem);
+  font-weight: 400;
+  text-decoration: line-through;
+  letter-spacing: -0.01em;
+}
+
+.salePrice {
+  color: #4d4d4d;
+  font-family: 'Countach-Regular', sans-serif;
+  font-size: clamp(0.75rem, 1.1vw, 1.375rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Dots */
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  border: 1px solid rgba(77, 77, 77, 0.3);
+}
+
+.dotFilled {
+  background: #4d4d4d;
+}
+
+.dotEmpty {
+  background: #ffffff;
+}
+
+/* ============================================================
+   1366px
+   ============================================================ */
+@media (max-width: 1366px) {
+  .productCard,
+  .productInfo {
+    max-width: clamp(220px, 26vw, 380px);
+  }
+}
+
+/* ============================================================
+   1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+  .right {
+    padding: 0 clamp(1rem, 2.5vw, 2.5rem);
+  }
+
+  .productCard,
+  .productInfo {
+    max-width: clamp(200px, 30vw, 340px);
+  }
+}
+
+/* ============================================================
+   MOBILE ≤768px — stacked
+   ============================================================ */
+@media (max-width: 768px) {
+  .featuredSection {
+    flex-direction: column;
+    padding: 0 0 40px 0;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .editorialWrapper {
+    aspect-ratio: 16 / 10;
+  }
+
+  .editorialText {
+    font-size: 14px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .right {
+    padding: 32px 20px;
+    width: 100%;
+    gap: 14px;
+  }
+
+  .productCard {
+    max-width: 100%;
+  }
+
+  .productInfo {
+    max-width: 100%;
+  }
+
+  .productName,
+  .originalPrice,
+  .salePrice {
+    font-size: 15px;
+  }
+
+  .saleTag {
+    font-size: 11px;
+  }
+}
+
+/* ============================================================
+   MOBILE ≤480px
+   ============================================================ */
+@media (max-width: 480px) {
+  .editorialWrapper {
+    aspect-ratio: 4 / 3;
+  }
+
+  .editorialText {
+    font-size: 13px;
+  }
+
+  .right {
+    padding: 24px 16px 32px;
+  }
+
+  .productName,
+  .originalPrice,
+  .salePrice {
+    font-size: 14px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* ============================================================
+   4K ≥2560px
+   ============================================================ */
+@media (min-width: 2560px) {
+  .editorialText { font-size: 1.5rem; }
+  .productName, .originalPrice, .salePrice { font-size: 1.5rem; }
+  .saleTag { font-size: 1.25rem; }
+  .productCard, .productInfo { max-width: 580px; }
+}

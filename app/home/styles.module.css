@@ -1,0 +1,8 @@
+/* Page-level styles for home page only */
+.homePage {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* Add any page-specific styles here if needed */
