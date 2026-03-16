@@ -1,0 +1,216 @@
+/* OurStoryName.module.css */
+
+.section {
+    width: 100%;
+    padding-left: clamp(20px, 2.6vw, 50px);
+    padding-right: clamp(20px, 2.6vw, 50px);
+    margin-top: clamp(40px, 3.125vw, 60px);
+    margin-bottom: clamp(40px, 3.125vw, 60px);
+}
+
+.container {
+    max-width: 1367px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   TOP ROW — Title + Image side by side
+   ============================================ */
+.topRow {
+    display: flex;
+    align-items: center;
+    gap: clamp(40px, 4.17vw, 80px);
+}
+
+.titleColumn {
+    flex-shrink: 0;
+    width: clamp(200px, 18.75vw, 360px);
+}
+
+.title {
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(24px, 1.82vw, 35px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #4d4d4d;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.imageColumn {
+    flex: 1;
+    max-width: clamp(280px, 46.875vw, 900px);
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    /* Adjust to match your actual image dimensions */
+    aspect-ratio: 900 / 550;
+}
+
+.img {
+    object-fit: contain;
+    object-position: center center;
+}
+
+/* ============================================
+   BOTTOM ROW — Spacer + Content
+   ============================================ */
+.bottomRow {
+    display: flex;
+    gap: clamp(40px, 4.17vw, 80px);
+}
+
+.spacer {
+    flex-shrink: 0;
+    width: clamp(200px, 18.75vw, 360px);
+}
+
+.contentColumn {
+    flex: 1;
+    max-width: clamp(280px, 46.875vw, 900px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 1.25vw, 24px);
+}
+
+
+
+.regular {
+    font-weight: 400;
+}
+
+.italic {
+    font-style: italic;
+    font-weight: 600;
+}
+
+.textContent {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1vw, 20px);
+}
+
+.paragraph {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.25vw, 24px);
+    line-height: 1.55;
+    color: #4d4d4d;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* ============================================
+   TABLET ≤1024px
+   ============================================ */
+@media (max-width: 1024px) {
+    .topRow {
+        gap: clamp(30px, 4vw, 50px);
+    }
+
+    .bottomRow {
+        gap: clamp(30px, 4vw, 50px);
+    }
+
+    .titleColumn {
+        width: clamp(180px, 22vw, 280px);
+    }
+
+    .spacer {
+        width: clamp(180px, 22vw, 280px);
+    }
+
+    .title {
+        font-size: clamp(22px, 2.5vw, 28px);
+    }
+
+  
+
+    .paragraph {
+        font-size: clamp(16px, 2vw, 20px);
+    }
+
+    .imageColumn {
+        max-width: 100%;
+    }
+
+    .contentColumn {
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   MOBILE ≤768px
+   ============================================ */
+@media (max-width: 768px) {
+    .section {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .topRow {
+        flex-direction: column;
+        gap: 24px;
+        align-items: flex-start;
+    }
+
+    .bottomRow {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .titleColumn {
+        width: 100%;
+    }
+
+    .spacer {
+        display: none;
+    }
+
+    .imageColumn {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .imageWrapper {
+        aspect-ratio: 900 / 600;
+    }
+
+
+    .paragraph {
+        font-size: 16px;
+    }
+
+    .contentColumn {
+        gap: 16px;
+        max-width: 100%;
+    }
+
+    .textContent {
+        gap: 12px;
+    }
+}
+
+/* ============================================
+   SMALL MOBILE ≤480px
+   ============================================ */
+@media (max-width: 480px) {
+    .title {
+        font-size: 24px;
+    }
+
+
+    .paragraph {
+        font-size: 15px;
+    }
+}

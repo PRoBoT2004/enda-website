@@ -1,0 +1,84 @@
+/* OurStoryIntro.module.css */
+
+.introSection {
+    margin-top: clamp(24px, 2vw, 40px);
+    padding-left: clamp(20px, 2.6vw, 50px);
+    padding-right: clamp(20px, 2.6vw, 50px);
+    display: flex;
+    justify-content: flex-start;
+    background-color: transparent;
+    margin-bottom: clamp(40px, 4.1vw, 80px);
+}
+
+.container {
+    /* Narrower container so text wraps into 3 lines at 35px */
+    max-width: clamp(300px, 62vw, 1190px);
+    width: 100%;
+}
+
+.text {
+    color: #4d4d4d;
+    text-align: left;
+    font-family: "-", sans-serif;
+    /* Back to 35px at 1920 — but container is narrower so it wraps to 3 lines */
+    font-size: clamp(16px, 1.82vw, 35px);
+    line-height: 140%;
+    font-weight: 400;
+    position: relative;
+    height: auto;
+}
+
+.text * {
+    box-sizing: border-box;
+}
+
+.boldText {
+    font-family: 'Countach-Regular', sans-serif;
+}
+
+.lightText {
+    font-family: 'Countach-Light', sans-serif;
+    font-weight: 300;
+}
+
+/* ============================================
+   TABLET ≤1024px
+   ============================================ */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 100%;
+    }
+
+    .text {
+        font-size: clamp(18px, 2.5vw, 24px);
+    }
+}
+
+/* ============================================
+   MOBILE ≤768px
+   ============================================ */
+@media (max-width: 768px) {
+    .introSection {
+        margin-top: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 40px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .text {
+        font-size: clamp(16px, 4.2vw, 20px);
+    }
+}
+
+/* ============================================
+   SMALL MOBILE ≤480px
+   ============================================ */
+@media (max-width: 480px) {
+    .text {
+        font-size: clamp(14px, 4vw, 16px);
+    }
+}

@@ -1,0 +1,19 @@
+/* OurStoryWeMove.module.css */
+
+.section {
+    width: 100%;
+    margin-top: clamp(40px, 3.125vw, 60px);
+    margin-bottom: clamp(40px, 3.125vw, 60px);
+}
+
+.imageWrapper {
+    width: 100%;
+    position: relative;
+    /* Adjust aspect-ratio to match your actual image dimensions */
+    aspect-ratio: 1920 / 900;
+}
+
+.img {
+    object-fit: cover;
+    object-position: center center;
+}

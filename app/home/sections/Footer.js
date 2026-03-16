@@ -48,7 +48,7 @@ export default function Footer() {
                 {/* ── Col 3: Company ── */}
                 <div className={styles.linkCol}>
                     <h3 className={styles.colHead}>Company</h3>
-                    <a href="#" className={styles.link}>Our Story</a>
+                    <a href="/ourstory" className={styles.link}>Our Story</a>
                     <a href="#" className={styles.link}>Journal</a>
                     <a href="#" className={styles.link}>Customer Care</a>
                     <a href="#" className={styles.link}>Stores</a>

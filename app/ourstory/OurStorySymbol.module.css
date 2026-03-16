@@ -1,0 +1,286 @@
+/* OurStorySymbol.module.css */
+
+.section {
+    width: 100%;
+    padding-left: clamp(20px, 2.6vw, 50px);
+    padding-right: clamp(20px, 2.6vw, 50px);
+    margin-top: clamp(40px, 3.125vw, 60px);
+    margin-bottom: clamp(40px, 3.125vw, 60px);
+}
+
+.container {
+    max-width: 1367px;
+    width: 100%;
+    display: flex;
+    gap: clamp(40px, 4.17vw, 80px);
+    align-items: flex-start;
+}
+
+/* ============================================
+   LEFT COLUMN — Title
+   ============================================ */
+.titleColumn {
+    flex-shrink: 0;
+    width: clamp(200px, 18.75vw, 360px);
+    padding-top: clamp(40px, 3vw, 56px);
+}
+
+.title {
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(24px, 1.82vw, 35px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.9px;
+    color: #4d4d4d;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* ============================================
+   RIGHT COLUMN — Content
+   ============================================ */
+.contentColumn {
+    flex: 1;
+    max-width: clamp(280px, 46.875vw, 900px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 1.5vw, 28px);
+}
+
+/* ============================================
+   TOP AREA — Headline + Spear
+   ============================================ */
+.topArea {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 1.25vw, 24px);
+}
+
+.headline {
+    font-size: clamp(28px, 2.29vw, 44px);
+    line-height: 1;
+    color: #4d4d4d;
+    margin: 0;
+}
+
+.light {
+    font-family: 'Countach-Light', sans-serif;
+    font-weight: 300;
+}
+
+.boldItalic {
+    font-family: 'Countach-BoldItalic', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.spearWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 600 / 280;
+}
+
+.spearImg {
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* ============================================
+   INTRO TEXT
+   ============================================ */
+.introText {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.25vw, 24px);
+    line-height: 1.4;
+    color: #4d4d4d;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* ============================================
+   THREE COLUMNS
+   ============================================ */
+.threeColumns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2vw, 40px);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 0.7vw, 14px);
+}
+
+.columnHeader {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 0.6vw, 12px);
+}
+
+.columnTitle {
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(18px, 1.46vw, 28px);
+    font-weight: 400;
+    line-height: 1;
+    color: #4d4d4d;
+    margin: 0;
+}
+
+.arrow {
+    width: clamp(20px, 1.67vw, 32px);
+    height: auto;
+    flex-shrink: 0;
+}
+
+.columnText {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(14px, 1.25vw, 24px);
+    line-height: 1.2;
+    color: #4d4d4d;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* ============================================
+   BOTTOM TEXT
+   ============================================ */
+.bottomText {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.25vw, 24px);
+    line-height: 1.4;
+    color: #4d4d4d;
+    font-weight: 400;
+    margin: 0;
+    margin-top: clamp(12px, 1vw, 20px);
+}
+
+/* ============================================
+   TABLET ≤1024px
+   ============================================ */
+@media (max-width: 1024px) {
+    .container {
+        gap: clamp(30px, 4vw, 50px);
+    }
+
+    .titleColumn {
+        width: clamp(180px, 22vw, 280px);
+    }
+
+    .title {
+        font-size: clamp(22px, 2.5vw, 28px);
+    }
+
+    .contentColumn {
+        max-width: 100%;
+    }
+
+    .threeColumns {
+        gap: clamp(16px, 2vw, 30px);
+    }
+
+    .columnTitle {
+        font-size: clamp(16px, 2vw, 22px);
+    }
+
+    .columnText {
+        font-size: clamp(14px, 1.8vw, 18px);
+    }
+}
+
+/* ============================================
+   MOBILE ≤768px
+   ============================================ */
+@media (max-width: 768px) {
+    .section {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .titleColumn {
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .contentColumn {
+        max-width: 100%;
+        gap: 20px;
+    }
+
+    .headline {
+        font-size: 32px;
+    }
+
+    .spearWrapper {
+        aspect-ratio: 600 / 320;
+    }
+
+    .threeColumns {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .columnHeader {
+        gap: 10px;
+    }
+
+    .columnTitle {
+        font-size: 22px;
+    }
+
+    .arrow {
+        width: 24px;
+    }
+
+    .columnText {
+        font-size: 16px;
+    }
+
+    .introText {
+        font-size: 16px;
+    }
+
+    .bottomText {
+        font-size: 16px;
+    }
+}
+
+/* ============================================
+   SMALL MOBILE ≤480px
+   ============================================ */
+@media (max-width: 480px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .headline {
+        font-size: 28px;
+    }
+
+    .columnTitle {
+        font-size: 20px;
+    }
+
+    .columnText {
+        font-size: 15px;
+    }
+
+    .introText {
+        font-size: 15px;
+    }
+
+    .bottomText {
+        font-size: 15px;
+    }
+}

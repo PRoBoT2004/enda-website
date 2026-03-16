@@ -11,7 +11,7 @@ export default function Navigation() {
         { name: "Men's Collection", href: '/mens' },
         { name: "Women's Collection", href: '/womens' },
         { name: 'Running Shoes', href: '/running' },
-        { name: 'Our Story', href: '/story' },
+        { name: 'Our Story', href: '/ourstory' },
         { name: 'Journal', href: '/journal' },
         { name: 'Locate a Store', href: '/stores' },
     ]
