@@ -8,10 +8,12 @@ export default function TopBar() {
             {/* Left: Sign up text with arrow */}
             <div className={styles.leftContent}>
                 <span className={styles.signUpText}>SIGN UP & GET 10% OFF</span>
-                <img
+                <Image
                     className={styles.arrowIcon}
-                    src="../../images/topbar/group-2.svg"
+                    src="/images/Topbar/group-2.svg"
                     alt=""
+                    width={24}
+                    height={24}
                 />
             </div>
 
@@ -30,7 +32,7 @@ export default function TopBar() {
 
                 <div className={styles.flagWrapper}>
                     <Image
-                        src="../../images/topbar/flag.svg"
+                        src="/images/Topbar/flag.svg"
                         alt="Kenya"
                         width={24}
                         height={24}
