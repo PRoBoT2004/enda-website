@@ -10,7 +10,7 @@ export default function TopBar() {
                 <span className={styles.signUpText}>SIGN UP & GET 10% OFF</span>
                 <img
                     className={styles.arrowIcon}
-                    src="/images/topbar/group-2.svg"
+                    src="../../images/topbar/group-2.svg"
                     alt=""
                 />
             </div>
@@ -30,7 +30,7 @@ export default function TopBar() {
 
                 <div className={styles.flagWrapper}>
                     <Image
-                        src="./images/topbar/flag.svg"
+                        src="../../images/topbar/flag.svg"
                         alt="Kenya"
                         width={24}
                         height={24}
