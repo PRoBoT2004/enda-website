@@ -30,7 +30,7 @@ export default function TopBar() {
 
                 <div className={styles.flagWrapper}>
                     <Image
-                        src="/images/topbar/flag.svg"
+                        src="./images/topbar/flag.svg"
                         alt="Kenya"
                         width={24}
                         height={24}
