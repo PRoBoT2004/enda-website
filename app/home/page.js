@@ -3,9 +3,11 @@ import Navigation from './sections/Navigation'
 import HeroSection from './sections/HeroSection'
 import ShopSection from './sections/ShopSection'
 import FeaturedSection from './sections/FeaturedSection'
-import ShowcaseSection from './sections/ShowcaseSection'
-import StoryBanner from './sections/StoryBanner'
-import InfoSection from './sections/InfoSection'
+import EditorialSection from './sections/EditorialSection'
+// import ShowcaseSection from './sections/ShowcaseSection'
+import WeEndaTogether from './sections/WeEndaTogether'
+// import StoryBanner from './sections/StoryBanner'
+// import InfoSection from './sections/InfoSection'
 import Footer from './sections/Footer'
 
 export const metadata = {
@@ -21,9 +23,11 @@ export default function HomePage() {
             <HeroSection />
             <ShopSection />
             <FeaturedSection />
-            <ShowcaseSection />   {/* 4-image grid, normal flow */}
-            <StoryBanner />
-            <InfoSection />
+            <EditorialSection />
+            <WeEndaTogether />
+            {/* <ShowcaseSection />   4-image grid, normal flow */}
+            {/* <StoryBanner />
+            <InfoSection /> */}
             <Footer />
             {/* Next sections will go here */}
         </main>

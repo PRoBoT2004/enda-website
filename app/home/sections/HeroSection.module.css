@@ -1,9 +1,8 @@
-/* ============================================================
-   DESKTOP HERO — shown above 768px
-   MOBILE HERO  — shown below 768px
-   ============================================================ */
+/* app/home/sections/HeroSection.module.css */
 
-/* ── DESKTOP: hidden on mobile ── */
+/* ============================================================
+   DESKTOP HERO — above 768px
+   ============================================================ */
 .heroDesktop {
   position: relative;
   width: 100%;
@@ -17,7 +16,7 @@
   display: none;
 }
 
-/* ========== DESKTOP BACKGROUND IMAGE ========== */
+/* ── Background image ── */
 .backgroundImage {
   position: absolute;
   inset: 0;
@@ -31,23 +30,23 @@
   object-position: 65% 25%;
 }
 
-/* ========== GRADIENT ========== */
+/* ── Gradient ── */
 .gradient {
   position: absolute;
   inset: 0;
   z-index: 2;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0.3) 35%,
-    rgba(0, 0, 0, 0) 60%
+    rgba(0, 0, 0, 0.80) 0%,
+    rgba(0, 0, 0, 0.25) 35%,
+    rgba(0, 0, 0, 0.0)  60%
   );
 }
 
-/* ========== DESKTOP CONTENT ========== */
+/* ── Content ── */
 .contentContainer {
   position: absolute;
-  bottom: clamp(2rem, 5vh, 5rem);
+  bottom: clamp(2.5rem, 6vh, 5.5rem);
   left: 0;
   right: 0;
   padding: 0 clamp(1.5rem, 3.2vw, 3.5rem);
@@ -60,13 +59,13 @@
 .textWrapper {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.4rem, 0.8vw, 0.75rem);
+  gap: clamp(0.4rem, 0.7vw, 0.75rem);
 }
 
 .mainHeading {
   color: #ffffff;
   font-family: 'Countach-Regular', sans-serif;
-  font-size: clamp(2.25rem, 5.5vw, 5.25rem);
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
   font-weight: 400;
@@ -76,73 +75,65 @@
 
 .subheading {
   color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(0.875rem, 1.4vw, 1.3rem);
-  line-height: 1.5;
+  font-family: var(--font-body);
+  font-size: clamp(0.875rem, 1.3vw, 1.25rem);
+  line-height: 1.55;
   font-weight: 400;
   margin: 0;
-  max-width: clamp(20rem, 40vw, 42rem);
-  opacity: 0.95;
+  max-width: clamp(18rem, 38vw, 42rem);
+  opacity: 0.9;
 }
 
 .ctaLink {
   display: inline-flex;
   align-items: flex-end;
-  margin-top: clamp(1.5rem, 3.5vw, 3.5rem);
+  margin-top: clamp(1.25rem, 2.5vw, 2.5rem);
   padding-bottom: 0.2rem;
   border-bottom: 1px solid #ffffff;
   width: fit-content;
   text-decoration: none;
-  transition: opacity 0.2s ease;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
-.ctaLink:hover {
-  opacity: 0.75;
-}
+.ctaLink:hover { opacity: 0.7; }
 
 .ctaText {
   color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(0.875rem, 1.15vw, 1.125rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 1vw, 0.9375rem);
   line-height: 1;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ============================================================
    DESKTOP BREAKPOINTS
    ============================================================ */
 @media (max-width: 1366px) {
-  .contentContainer {
-    padding: 0 clamp(1.25rem, 2.5vw, 2.5rem);
-    bottom: clamp(1.75rem, 4.5vh, 4rem);
-  }
-  .mainHeading { font-size: clamp(2rem, 5vw, 4.5rem); }
-  .subheading  { font-size: clamp(0.8125rem, 1.3vw, 1.125rem); }
+  .contentContainer { bottom: clamp(2rem, 5vh, 4.5rem); }
+  .mainHeading      { font-size: clamp(2.25rem, 5vw, 4.75rem); }
+  .subheading       { font-size: clamp(0.8125rem, 1.2vw, 1.125rem); }
 }
 
 @media (max-width: 1024px) {
-  .contentContainer {
-    padding: 0 clamp(1rem, 2vw, 2rem);
-    bottom: clamp(1.5rem, 3.5vh, 3rem);
-  }
-  .mainHeading { font-size: clamp(1.75rem, 4.5vw, 3.5rem); }
-  .subheading  { font-size: clamp(0.75rem, 1.2vw, 1rem); max-width: 85%; }
-  .ctaLink     { margin-top: clamp(1.25rem, 3vw, 2.5rem); }
+  .contentContainer { bottom: clamp(1.75rem, 4vh, 3.5rem); }
+  .mainHeading      { font-size: clamp(2rem, 4.5vw, 3.75rem); }
+  .subheading       { font-size: clamp(0.75rem, 1.15vw, 1rem); max-width: 85%; }
 }
 
 /* ============================================================
    MOBILE ≤768px
-   - Hide desktop, show mobile layout
-   - Image uses contain → full shoe visible, black bg blends
-   - Text sits in solid black block directly below image
-   - Zero gap — black image bg + black div = seamless
+   - Hide desktop hero
+   - Show mobile: full image on top (contain, no crop)
+     then text block below — but NO hard black start.
+     Image bg is black, content bg is black = seamless.
+     Gradient on image fades bottom edge so it melts into
+     the content block below — transparent → soft black.
    ============================================================ */
 @media (max-width: 768px) {
-  .heroDesktop {
-    display: none;
-  }
+  .heroDesktop { display: none; }
 
   .heroMobile {
     display: flex;
@@ -151,25 +142,39 @@
     background: #000000;
   }
 
-  /* Image container — aspect ratio matches the landscape image */
+  /* Image wrapper with gradient overlay at the bottom edge */
   .mobileImageWrapper {
+
     position: relative;
     width: 100%;
-    /* 1400×933 image ratio = 66.6% */
     aspect-ratio: 1400 / 933;
     background: #000000;
     flex-shrink: 0;
   }
 
-  .mobileImg {
-    object-fit: contain;   /* full image, no cropping */
-    object-position: center center;
+  /* Gradient ON the image — fades bottom into black seamlessly */
+  .mobileImageWrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.0)  50%,
+      rgba(0, 0, 0, 0.55) 80%,
+      rgba(0, 0, 0, 1.0) 100%
+    );
   }
 
-  /* Black content block — seamless continuation of image bg */
+  .mobileImg {
+    object-fit: contain;
+    object-position: center top;
+  }
+
+  /* Content block — pure black, seamless with gradient above */
   .mobileContent {
     background: #000000;
-    padding: 24px 20px 40px;
+    padding: 20px 20px 44px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -178,9 +183,9 @@
   .mobileHeading {
     color: #ffffff;
     font-family: 'Countach-Regular', sans-serif;
-    font-size: 32px;
-    line-height: 1;
-    letter-spacing: -0.01em;
+    font-size: 34px;
+    line-height: 0.97;
+    letter-spacing: -0.015em;
     font-weight: 400;
     text-transform: uppercase;
     margin: 0;
@@ -188,12 +193,12 @@
 
   .mobileSubheading {
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.55;
     font-weight: 400;
     margin: 10px 0 0;
-    opacity: 0.9;
+    opacity: 0.88;
   }
 
   .mobileCtaLink {
@@ -204,21 +209,20 @@
     border-bottom: 1px solid #ffffff;
     width: fit-content;
     text-decoration: none;
-    transition: opacity 0.2s ease;
     cursor: pointer;
+    transition: opacity 0.2s ease;
   }
 
-  .mobileCtaLink:hover {
-    opacity: 0.75;
-  }
+  .mobileCtaLink:hover { opacity: 0.7; }
 
   .mobileCtaText {
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 14px;
+    font-family: var(--font-body);
+    font-size: 11px;
     line-height: 1;
-    font-weight: 600;
-    letter-spacing: 0.01em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 }
 
@@ -226,24 +230,17 @@
    MOBILE ≤480px
    ============================================================ */
 @media (max-width: 480px) {
-  .mobileHeading {
-    font-size: 28px;
-  }
-
-  .mobileSubheading {
-    font-size: 13px;
-  }
-
-  .mobileContent {
-    padding: 20px 16px 36px;
-  }
+  .mobileHeading    { font-size: 28px; }
+  .mobileSubheading { font-size: 13px; }
+  .mobileContent    { padding: 16px 16px 36px; }
 }
 
 /* ============================================================
    4K ≥2560px
    ============================================================ */
 @media (min-width: 2560px) {
-  .mainHeading { font-size: 5.25rem; }
-  .subheading  { font-size: 1.5rem; }
-  .ctaText     { font-size: 1.25rem; }
+  .mainHeading      { font-size: 6rem; }
+  .subheading       { font-size: 1.5rem; max-width: 48rem; }
+  .ctaText          { font-size: 1.125rem; }
+  .contentContainer { bottom: 6rem; }
 }

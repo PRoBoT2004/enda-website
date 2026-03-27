@@ -1,130 +1,121 @@
+/* app/home/sections/ShopSection.module.css */
+
 /*
-  ============================================================
-  SHOP SECTION
-  Desktop: 3 equal columns, fade in on scroll (staggered)
-  Mobile:  horizontal scroll — swipeable cards, compact
-  ============================================================
+  SIZING REFERENCE — 1920px desktop
+  ─────────────────────────────────
+  Total card block height: 926px max
+    Title:       ~60px  (35px font, 60px line-height)
+    Image:       768px  (591×768 ratio)
+    Description: ~68px  (28px font, 2 lines)
+    Gaps:        ~30px
+  ─────────────────────────────────
+  All desktop values in rem (scales with compensated root).
+  Mobile values in px (root locked at 16px).
 */
 
-/* Spacer only used in mobile horizontal scroll — hidden on desktop */
-.scrollSpacer {
-  display: none;
-}
+.scrollSpacer { display: none; }
 
-
+/* ============================================================
+   SECTION
+   ============================================================ */
 .shopSection {
   width: 100%;
-  background: #ffffff;
-  margin-top: 4rem;
-  padding: 0 clamp(1rem, 2.5vw, 2rem);
-  padding-bottom: clamp(3rem, 6vw, 6rem);
+  background: #010101;
+  padding: clamp(2rem, 4vw, 3.75rem) clamp(1.25rem, 2.5vw, 2.5rem);
+  padding-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
-/* ========== GRID ========== */
+/* ============================================================
+   GRID — 3 equal columns
+   ============================================================ */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  gap: clamp(0.75rem, 1.5vw, 1.75rem);
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
 }
 
-/* ========== COLUMN — fade in animation ========== */
+/* ============================================================
+   COLUMN — entire card is a link
+   ============================================================ */
 .column {
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 
-  /* Initial state: invisible, slightly below */
+  /* Scroll fade-in initial state */
   opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Triggered by IntersectionObserver */
 .column.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ========== HEADER ========== */
-.columnHeader {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-bottom: clamp(0.5rem, 1vw, 0.875rem);
-}
-
+/* ============================================================
+   TITLE — AvenirNext Bold, uppercase
+   Figma: 35px at 1920px → 35/1920 = 1.823vw
+   ============================================================ */
 .title {
-  color: #4d4d4d;
-  font-family: 'Countach-Regular', sans-serif;
-  font-size: clamp(1.25rem, 1.9vw, 2.1875rem);
-  line-height: 1;
-  font-weight: 400;
+  color: #ffffff;
+  font-family: 'Countach-Light', sans-serif;
+  font-size: clamp(1.25rem, 1.823vw, 2.1875rem);
+  font-weight: 700;
   text-transform: uppercase;
-  margin: 0;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  margin: 0 0 clamp(0.5rem, 0.8vw, 0.875rem) 0;
 }
 
-.shopAllLink {
-  color: #4d4d4d;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(0.75rem, 1.1vw, 1.25rem);
-  font-weight: 600;
-  text-decoration: none;
-  border-bottom: 1.28px solid #4d4d4d;
-  padding-bottom: 2px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-left: 1rem;
-  transition: opacity 0.2s ease;
-  line-height: 1;
-  align-self: flex-end;
-}
-
-.shopAllLink:hover {
-  opacity: 0.6;
-}
-
-/* ========== IMAGE ========== */
+/* ============================================================
+   IMAGE — 591×768 ratio → portrait
+   Capped so total card ≤ 926px at 1920px
+   ============================================================ */
 .imageWrapper {
   position: relative;
   width: 100%;
   aspect-ratio: 591 / 768;
   overflow: hidden;
-  background: #f0f0f0;
+  background: #111111;
+  flex-shrink: 0;
 }
 
 .image {
   object-fit: cover;
   object-position: center;
-  transition: transform 0.5s ease;
+  transition: transform 0.55s ease;
 }
 
-.imageWrapper:hover .image {
-  transform: scale(1.03);
+.column:hover .image {
+  transform: scale(1.04);
 }
 
-/* ========== DESCRIPTION ========== */
+/* ============================================================
+   DESCRIPTION — Play Regular
+   Figma: 28px at 1920px → 28/1920 = 1.458vw
+   ============================================================ */
 .description {
-  color: #4d4d4d;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(0.75rem, 1.25vw, 1.5rem);
-  line-height: 1.5;
+  color: #ffffff;
+  font-family: 'Play', sans-serif;
+  font-size: clamp(0.875rem, 1.458vw, 1.75rem);
   font-weight: 400;
-  margin: 0;
-  padding-top: clamp(0.5rem, 1vw, 0.875rem);
+  line-height: 1.5;
+  margin: clamp(0.5rem, 0.8vw, 0.875rem) 0 0 0;
+  opacity: 0.85;
 }
 
 /* ============================================================
    1366px
    ============================================================ */
 @media (max-width: 1366px) {
-  .title       { font-size: clamp(1.125rem, 1.7vw, 1.875rem); }
-  .shopAllLink { font-size: clamp(0.6875rem, 1vw, 1.125rem); }
-  .description { font-size: clamp(0.6875rem, 1.1vw, 1.25rem); }
+  .title       { font-size: clamp(1.125rem, 1.6vw, 1.75rem); }
+  .description { font-size: clamp(0.8125rem, 1.2vw, 1.375rem); }
 }
 
 /* ============================================================
@@ -132,26 +123,22 @@
    ============================================================ */
 @media (max-width: 1024px) {
   .shopSection {
-    padding: 0 clamp(0.875rem, 2vw, 1.5rem);
-    padding-bottom: clamp(2rem, 4vw, 4rem);
-    margin-top: 3rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(0.875rem, 2vw, 1.5rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
   }
-
   .grid        { gap: clamp(0.625rem, 1.2vw, 1.25rem); }
-  .title       { font-size: clamp(1rem, 1.5vw, 1.5rem); }
-  .shopAllLink { font-size: clamp(0.625rem, 0.9vw, 1rem); }
-  .description { font-size: clamp(0.625rem, 1vw, 1rem); }
+  .title       { font-size: clamp(1rem, 1.4vw, 1.5rem); }
+  .description { font-size: clamp(0.75rem, 1.05vw, 1.125rem); }
 }
 
 /* ============================================================
    MOBILE ≤768px
-   Horizontal scroll — premium swipeable cards
-   Each card ~75vw wide so next card peeks = invitation to scroll
+   Horizontal swipeable scroll — each card 75vw wide
+   so the next card peeks = visual invitation to scroll
    ============================================================ */
 @media (max-width: 768px) {
   .shopSection {
-    margin-top: 0;
-    padding: 0 0 40px 0;
+    padding: 32px 0 40px 0;
   }
 
   .grid {
@@ -160,88 +147,49 @@
     overflow-x: auto;
     overflow-y: visible;
     gap: 12px;
-    padding: 24px 0 8px 20px;
+    padding: 0 20px 8px 20px;   /* permanent left + right gap */
+    scroll-padding-left: 20px;  /* snap always respects left gap */
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
 
-  .grid::-webkit-scrollbar {
+  .grid::-webkit-scrollbar { display: none; }
+
+  .scrollSpacer {
+    display: block;
+    flex: 0 0 0px;
+    min-width: 0px;
     display: none;
   }
 
-  /* Spacer gives first and last card breathing room */
-  .scrollSpacer {
-    display: block;
-    flex: 0 0 20px;
-    min-width: 20px;
-  }
-
   .column {
-    /* Fixed width card — 75vw so next card peeks at right */
-    flex: 0 0 72vw;
-    max-width: 280px;
+    flex: 0 0 74vw;
+    max-width: 300px;
     scroll-snap-align: start;
-    /* Reset fade — use simpler opacity for mobile */
+    /* reset desktop fade — always visible on mobile */
     opacity: 1;
     transform: none;
     transition: none;
   }
 
-  .column:last-child {
-    margin-right: 20px;
-  
-    opacity: 1;
-    transform: none;
-  }
+  .column:last-of-type { margin-right: 20px; }
 
-  .columnHeader {
-    padding-bottom: 8px;
-  }
+  .title       { font-size: 20px; margin-bottom: 8px; }
+  .description { font-size: 13px; margin-top: 8px; line-height: 1.5; }
 
-  .title {
-    font-size: 18px;
-    line-height: 1;
-  }
-
-  .shopAllLink {
-    font-size: 12px;
-  }
-
-  /* Shorter portrait image on mobile cards */
-  .imageWrapper {
-    aspect-ratio: 3 / 4;
-  }
-
-  .description {
-    font-size: 12px;
-    padding-top: 8px;
-    line-height: 1.5;
-  }
+  .imageWrapper { aspect-ratio: 3 / 4; }
 }
 
 /* ============================================================
-   MOBILE ≤480px — slightly narrower cards
+   MOBILE ≤480px
    ============================================================ */
 @media (max-width: 480px) {
-  .column {
-    flex: 0 0 78vw;
-    max-width: 260px;
-  }
-
-  .grid {
-    padding: 20px 0 8px 0;
-    gap: 10px;
-  }
-
-  .title {
-    font-size: 16px;
-  }
-
-  .description {
-    font-size: 11px;
-  }
+  .column      { flex: 0 0 78vw; max-width: 260px; }
+  .grid        { gap: 10px; padding: 0 16px 8px 16px; scroll-padding-left: 16px; }
+  .title       { font-size: 18px; }
+  .description { font-size: 12px; }
 }
 
 /* ============================================================
@@ -249,7 +197,48 @@
    ============================================================ */
 @media (min-width: 2560px) {
   .title       { font-size: 2.1875rem; }
-  .shopAllLink { font-size: 1.25rem; }
-  .description { font-size: 1.5rem; }
+  .description { font-size: 1.75rem; }
   .grid        { gap: 2rem; }
+}
+
+/* ============================================================
+   SHOP ALL BUTTON — centered, same style as hero CTA
+   ============================================================ */
+.shopAllWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.shopAllBtn {
+  display: inline-flex;
+  align-items: flex-end;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #ffffff;
+  width: fit-content;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.shopAllBtn:hover { opacity: 0.7; }
+
+.shopAllText {
+  color: #ffffff;
+  font-family: 'Play', sans-serif;
+  font-size: clamp(0.75rem, 1vw, 0.9375rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .shopAllWrapper { margin-top: 24px; }
+  .shopAllText    { font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .shopAllWrapper { margin-top: 20px; }
+  .shopAllText    { font-size: 11px; }
 }

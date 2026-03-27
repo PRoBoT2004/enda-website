@@ -1,8 +1,13 @@
+/* app/globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ========== FONT DECLARATIONS ========== */
+
+/* ── Countach — Display / Nav Headings ── */
+
 @font-face {
   font-family: 'Countach-Regular';
   src: url('/fonts/Countach_Regular.otf') format('opentype');
@@ -19,81 +24,92 @@
   font-display: swap;
 }
 
+
+
+/* ── Play — Body text ── */
+
 @font-face {
-  font-family: 'Countach-Bold';
-  src: url('/fonts/Countach_Bold.otf') format('opentype');
-  font-weight: 700;
+  font-family: 'Play';
+  src: url('/fonts/PLAY-REGULAR.TTF') format('truetype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Countach-Bold-Italic';
-  src: url('/fonts/Countach_Bold_Italic.otf') format('opentype');
+  font-family: 'Play';
+  src: url('/fonts/PLAY-BOLD.TTF') format('truetype');
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Countach-Italic';
-  src: url('/fonts/Countach_Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
+/* ========== DESIGN TOKENS ========== */
+:root {
+  --color-bg-primary:     #0a0a0a;
+  --color-bg-secondary:   #111111;
+  --color-bg-tertiary:    #1a1a1a;
 
-@font-face {
-  font-family: 'Countach-Light-Italic';
-  src: url('/fonts/Countach_Light_Italic.otf') format('opentype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
+  --color-text-primary:   #f5f5f5;
+  --color-text-secondary: #a0a0a0;
+  --color-text-accent:    #e8e8e8;
+
+  --color-accent:         #c8a96e;
+  --color-accent-hover:   #d4b97e;
+
+  --color-border:         #2a2a2a;
+
+  --font-heading: 'Countach-Light', sans-serif;
+  --font-body:    'Play', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* ========== ROOT FONT SIZE ========== */
 /*
-  Mobile (≤768px) : always 16px — browser handles it fine
-  Desktop 100%    : fluid clamp
-  Desktop 125%    : slight compensation
-  Desktop 150%    : slight compensation
-  Desktop 175%+   : NO intervention — let the browser zoom naturally
+  Strategy:
+  - Mobile (≤768px): always 16px. Never touched.
+  - Desktop 100% zoom: fluid clamp — scales with viewport width.
+  - Desktop 125% zoom: browser shrinks logical viewport to ~80%.
+    We detect via min-resolution: 120dpi and bump the base up so
+    text renders at the same PHYSICAL size as 100% zoom.
+  - Desktop 150% zoom: same logic, bigger bump.
+  - 175%+: let browser handle it naturally.
+
+  Key insight: at 125% zoom on a 1920px monitor, the CSS viewport
+  is ~1536px. So 0.833vw of 1536 = 12.8px. We target ~16px rendered,
+  so we use a higher vw multiplier to compensate.
 */
 
-/* Mobile: locked */
+/* Base — mobile first */
 :root {
   font-size: 16px;
 }
 
-/* Desktop base: fluid */
+/* Desktop 100% zoom */
 @media (min-width: 769px) {
   :root {
-    font-size: clamp(12px, 0.833vw, 16px);
+    font-size: clamp(14px, 0.9375vw, 18px);
   }
 }
 
-/* Windows 125% — desktop only */
+/* Desktop 125% zoom — DPI compensation
+   Target: same physical size as 100% zoom desktop */
 @media (min-width: 769px) and (min-resolution: 120dpi) and (max-resolution: 143dpi) {
   :root {
-    font-size: clamp(11px, 0.73vw, 14px);
+    font-size: clamp(14px, 1.1vw, 18px);
   }
 }
 
-/* Windows 150% — desktop only */
+/* Desktop 150% zoom */
 @media (min-width: 769px) and (min-resolution: 144dpi) and (max-resolution: 167dpi) {
   :root {
-    font-size: clamp(10px, 0.65vw, 13px);
+    font-size: clamp(13px, 1.25vw, 17px);
   }
 }
 
-/*
-  175% and 200%: intentionally omitted.
-  At this level the user wants bigger content — let the browser zoom.
-  Our layout is fluid enough to handle it naturally.
-*/
-
 /* ========== CSS RESET ========== */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -104,23 +120,30 @@ html {
 }
 
 body {
-  font-family: 'Countach-Regular', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Countach-Light', sans-serif;
+}
+
 img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 button {
   border: none;
   background: none;
   cursor: pointer;
+  font-family: inherit;
 }
 
 a {

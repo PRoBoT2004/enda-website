@@ -1,3 +1,4 @@
+// app/home/sections/ShopSection.js
 'use client'
 import { useEffect, useRef } from 'react'
 import styles from './ShopSection.module.css'
@@ -33,39 +34,31 @@ export default function ShopSection() {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add(styles.visible)
-                        observer.unobserve(entry.target) // fire once only
+                        observer.unobserve(entry.target)
                     }
                 })
             },
-            { threshold: 0.15 }
+            { threshold: 0.12 }
         )
-
-        colRefs.current.forEach((el) => {
-            if (el) observer.observe(el)
-        })
-
+        colRefs.current.forEach((el) => { if (el) observer.observe(el) })
         return () => observer.disconnect()
     }, [])
 
     return (
         <section className={styles.shopSection}>
+
+            {/* Grid */}
             <div className={styles.grid}>
-                {/* Spacer — pushes first card away from left edge on mobile */}
                 <div className={styles.scrollSpacer} aria-hidden="true" />
                 {categories.map((cat, i) => (
-                    <div
+                    <a
                         key={cat.title}
+                        href={cat.href}
                         className={styles.column}
                         ref={(el) => (colRefs.current[i] = el)}
                         style={{ transitionDelay: `${i * 0.15}s` }}
                     >
-                        {/* Header */}
-                        <div className={styles.columnHeader}>
-                            <h2 className={styles.title}>{cat.title}</h2>
-                            <a href={cat.href} className={styles.shopAllLink}>Shop All</a>
-                        </div>
-
-                        {/* Image */}
+                        <h2 className={styles.title}>{cat.title}</h2>
                         <div className={styles.imageWrapper}>
                             <Image
                                 src={cat.image}
@@ -75,14 +68,19 @@ export default function ShopSection() {
                                 sizes="(max-width: 768px) 80vw, 33vw"
                             />
                         </div>
-
-                        {/* Description */}
                         <p className={styles.description}>{cat.description}</p>
-                    </div>
+                    </a>
                 ))}
-                {/* Spacer — gives last card room on the right */}
                 <div className={styles.scrollSpacer} aria-hidden="true" />
             </div>
+
+            {/* Shop All CTA — centered, same style as hero Explore Collection */}
+            <div className={styles.shopAllWrapper}>
+                <a href="/collection" className={styles.shopAllBtn}>
+                    <span className={styles.shopAllText}>Shop All</span>
+                </a>
+            </div>
+
         </section>
     )
 }

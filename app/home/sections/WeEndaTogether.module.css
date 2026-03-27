@@ -1,0 +1,15 @@
+/* app/home/sections/WeEndaTogether.module.css */
+
+.section {
+  width: 100%;
+  background: #000000;
+  display: block;
+  line-height: 0; /* removes any ghost space below inline img */
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain; /* full image always visible, never cropped */
+}

@@ -1,40 +1,44 @@
-/*
-  ============================================================
-  NAVIGATION SIZING STRATEGY
-  ============================================================
-  Desktop (>768px):
-    - rem units → scale with root font size
-    - root font size does Windows DPI compensation
-    - vw-based clamp for fluid scaling between breakpoints
+/* app/components/Navigation/Navigation.module.css */
 
-  Mobile (≤768px):
-    - REAL px values (or px-equivalent rem at 16px base)
-    - Root is locked at 16px on mobile so 1rem = 16px always
-    - Touch targets minimum 44px tall
-    - Font sizes comfortable for thumb reading
-  ============================================================
+/*
+  SIZING STRATEGY — same rule as TopBar:
+  Desktop  → rem  (scales with compensated root in globals.css)
+  Mobile   → px   (root locked at 16px, immune to DPI changes)
+
+  Nav is position: fixed so it floats above the hero image.
+  TopBar is also fixed, so nav top = topbar height.
+
+  --topbar-h is declared in globals.css :root
+  We add it here too as a fallback.
 */
 
-/* ---- Topbar height variable (synced with TopBar component) ---- */
 :root {
-  --topbar-h: 2.5rem;   /* 40px — TopBar height on desktop     */
-  --nav-gap:  0.75rem;  /* 12px gap between topbar bottom & nav */
+  --topbar-h: 2.75rem;   /* keep in sync with TopBar min-height */
+  --nav-h:    4.5rem;    /* desktop nav height */
 }
 
-/* ========== NAV — DESKTOP ========== */
+/* ========== NAV SHELL ========== */
 .navigation {
-  position: absolute;
-  top: calc(var(--topbar-h) + var(--nav-gap)); /* always 12px below topbar */
+  position: fixed;
+  top: var(--topbar-h);
   left: 0;
   right: 0;
   width: 100%;
-  height: 4.5rem;
+  height: var(--nav-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(1rem, 2.5vw, 2rem);
+  padding: 0 clamp(1.25rem, 2.5vw, 2.5rem);
   z-index: 1000;
   background: transparent;
+  transition: background 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+/* Subtle darkening on scroll — keeps links readable */
+.navigation.scrolled {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* ========== LOGO ========== */
@@ -42,25 +46,26 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  line-height: 0;
 }
 
 .logo {
-  width: clamp(4rem, 6.8vw, 8.2rem);
+  width: clamp(4.5rem, 6.8vw, 8.2rem);
   height: auto;
   object-fit: contain;
+  filter: brightness(0) invert(1); /* force white on dark bg */
 }
 
 /* ========== DESKTOP MENU ========== */
 .menuList {
   display: flex;
   align-items: center;
-  gap: clamp(1rem, 2.2vw, 2.6rem);
   list-style: none;
   margin: 0;
   padding: 0;
   flex: 1;
-  justify-content: flex-end;
-  padding-right: clamp(1rem, 2.5vw, 2.8rem);
+  justify-content: center;          /* center nav links between logo + icons */
+  gap: clamp(1rem, 2vw, 2.5rem);
 }
 
 .menuItem {
@@ -70,27 +75,43 @@
 
 .menuLink {
   color: #ffffff;
-  font-family: 'Countach-Regular', sans-serif;
-  /* 26px at 1920px: 26/1920 = 1.354vw */
-  font-size: clamp(0.8125rem, 1.354vw, 1.625rem);
+  font-family: 'Countach-Light', sans-serif;
+  /* Figma: 24px at 1920px → 24/1920 = 1.25vw */
+  font-size: clamp(0.875rem, 1.25vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
   line-height: 1;
-  letter-spacing: -0.02em;
-  font-weight: 400;
-  text-decoration: none;
   white-space: nowrap;
+  text-decoration: none;
+  position: relative;
   transition: opacity 0.2s ease;
-  cursor: pointer;
+}
+
+/* Underline reveal on hover */
+.menuLink::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #ffffff;
+  transition: width 0.25s ease;
 }
 
 .menuLink:hover {
-  opacity: 0.65;
+  opacity: 0.75;
 }
 
-/* ========== ICONS — DESKTOP ========== */
+.menuLink:hover::after {
+  width: 100%;
+}
+
+/* ========== ICONS ========== */
 .iconsWrapper {
   display: flex;
   align-items: center;
-  gap: clamp(0.75rem, 1.4vw, 1.6rem);
+  gap: clamp(0.75rem, 1.2vw, 1.5rem);
   flex-shrink: 0;
 }
 
@@ -112,44 +133,34 @@
 
 .iconButton img {
   width: auto;
-  height: clamp(1rem, 1.35vw, 1.5rem);
+  height: clamp(1.1rem, 1.4vw, 1.6rem);
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
 
-/* Hidden on mobile */
-.desktopOnly {
-  display: flex;
-}
+/* Hide hamburger on desktop */
+.hamburger { display: none; }
 
-/* Hidden on desktop */
-.hamburger {
-  display: none;
-}
+/* Hide mobile menu on desktop */
+.mobileMenu { display: none; }
 
-/* Mobile menu hidden on desktop */
-.mobileMenu {
-  display: none;
-}
+/* Hide backdrop on desktop */
+.backdrop { display: none; }
 
 /* ============================================================
    1366px
    ============================================================ */
 @media (max-width: 1366px) {
-  .navigation {
-    height: 4rem;
-  }
+  :root { --nav-h: 4.25rem; }
 
   .menuLink {
-    font-size: clamp(0.75rem, 1.2vw, 1.25rem);
+    font-size: clamp(0.8125rem, 1.1vw, 1.25rem);
   }
-
   .logo {
-    width: clamp(3.5rem, 5.5vw, 6.5rem);
+    width: clamp(4rem, 6vw, 7rem);
   }
-
   .iconButton img {
-    height: clamp(0.9rem, 1.2vw, 1.3rem);
+    height: clamp(1rem, 1.2vw, 1.35rem);
   }
 }
 
@@ -157,58 +168,56 @@
    1024px
    ============================================================ */
 @media (max-width: 1024px) {
-  .navigation {
-    height: 3.75rem;
-    padding: 0 clamp(0.875rem, 1.75vw, 1.5rem);
-  }
+  :root { --nav-h: 4rem; }
 
+  .navigation {
+    padding: 0 clamp(0.875rem, 2vw, 1.5rem);
+  }
   .menuList {
     gap: clamp(0.75rem, 1.5vw, 1.5rem);
-    padding-right: clamp(0.75rem, 1.5vw, 1.5rem);
   }
-
   .menuLink {
-    font-size: clamp(0.6875rem, 1.05vw, 1rem);
+    font-size: clamp(0.75rem, 1vw, 1.1rem);
   }
-
   .logo {
-    width: clamp(3rem, 5vw, 5.5rem);
+    width: clamp(3.5rem, 5vw, 5.5rem);
   }
-
   .iconButton img {
-    height: clamp(0.875rem, 1.1vw, 1.15rem);
+    height: clamp(0.9rem, 1.1vw, 1.2rem);
   }
 }
 
 /* ============================================================
    MOBILE ≤768px
-   Root font is locked at 16px here.
-   Use real px values so sizes are NEVER affected by
-   the DPI compensation in globals.css.
-   All touch targets ≥44px for good UX.
+   Everything in px. Root is 16px locked.
+   Nav becomes sticky, solid dark bg.
+   Desktop menu hidden → hamburger + fullscreen drawer.
    ============================================================ */
 @media (max-width: 768px) {
+  :root {
+    --topbar-h: 40px;
+    --nav-h:    56px;
+  }
 
-  /* Nav becomes part of document flow — overlap impossible */
   .navigation {
-    position: relative;
-    top: 0;
-    height: 56px;           /* solid touch-friendly height */
+    position: fixed;
+    top: var(--topbar-h);
+    height: var(--nav-h);
     padding: 0 20px;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .navigation.scrolled {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   /* Hide desktop menu */
-  .menuList {
-    display: none;
-  }
-
-  /* Hide user icon */
-  .desktopOnly {
-    display: none !important;
-  }
+  .menuList    { display: none; }
+  .desktopOnly { display: none !important; }
 
   /* Show hamburger */
   .hamburger {
@@ -217,75 +226,94 @@
     height: 44px;
     align-items: center;
     justify-content: center;
+    margin-right: -10px; /* optical alignment */
   }
 
-  .logo {
-    width: 72px;            /* comfortable logo size on mobile */
-  }
+  .logo { width: 72px; }
 
-  .iconsWrapper {
-    gap: 12px;
-  }
+  .iconsWrapper { gap: 8px; }
 
-  .iconButton img {
-    height: 20px;           /* clear, tappable icon size */
-    filter: brightness(0) invert(1);
-  }
+  .iconButton img { height: 20px; }
 
-  /* Mobile dropdown menu */
+  /* ── Mobile fullscreen drawer ── */
   .mobileMenu {
     display: block;
-    position: relative;     /* flows below nav, no overlap */
-    top: 0;
+    position: fixed;
+    top: calc(40px + 56px); /* topbar + nav */
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.93);
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease;
-    z-index: 998;
+    bottom: 0;
+    background: #0a0a0a;
+    z-index: 999;
+    overflow-y: auto;
+    /* slide in from top */
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity   0.25s ease;
+    pointer-events: none;
   }
 
   .mobileMenuOpen {
-    max-height: 480px;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
   }
 
   .mobileMenuList {
     list-style: none;
     margin: 0;
-    padding: 8px 20px 16px;
+    padding: 8px 24px 32px;
     display: flex;
     flex-direction: column;
   }
 
   .mobileMenuItem {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid #1a1a1a;
+    /* staggered entrance */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease calc(var(--i) * 0.05s),
+                transform 0.3s ease calc(var(--i) * 0.05s);
   }
 
-  .mobileMenuItem:last-child {
-    border-bottom: none;
+  .mobileMenuOpen .mobileMenuItem {
+    opacity: 1;
+    transform: translateY(0);
   }
+
+  .mobileMenuItem:last-child { border-bottom: none; }
 
   .mobileMenuLink {
     display: block;
     color: #ffffff;
-    font-family: 'Countach-Regular', sans-serif;
-    font-size: 20px;        /* comfortable reading size on mobile */
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-family: 'Countach-Light', sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
     text-decoration: none;
-    padding: 14px 0;        /* tall tap target */
-    transition: opacity 0.2s ease;
+    padding: 18px 0;
+    transition: color 0.2s ease;
   }
 
-  .mobileMenuLink:hover,
   .mobileMenuLink:active {
-    opacity: 0.6;
+    color: #c8a96e;
+  }
+
+  /* Backdrop */
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
 }
 
 /* ============================================================
-   MOBILE ≤480px — slightly tighter
+   MOBILE ≤480px
    ============================================================ */
 @media (max-width: 480px) {
   .navigation {
@@ -293,46 +321,30 @@
     padding: 0 16px;
   }
 
-  .logo {
-    width: 60px;
-  }
+  .logo { width: 60px; }
 
-  .iconsWrapper {
-    gap: 10px;
-  }
+  .iconsWrapper { gap: 6px; }
 
-  .iconButton img {
-    height: 18px;
+  .iconButton img { height: 18px; }
+
+  .mobileMenu {
+    top: calc(36px + 52px);
   }
 
   .mobileMenuLink {
-    font-size: 18px;
-    padding: 12px 0;
+    font-size: 20px;
+    padding: 16px 0;
   }
 }
 
 /* ============================================================
-   4K / Ultra-wide ≥2560px
+   4K ≥2560px
    ============================================================ */
 @media (min-width: 2560px) {
-  .navigation {
-    height: 6rem;
-  }
+  :root { --nav-h: 6rem; }
 
-  .menuLink {
-    font-size: 1.625rem; /* exact 26px from Figma */
-  }
-
-  .logo {
-    width: 10rem;
-  }
-
-  .iconButton img {
-    height: 1.75rem;
-  }
-
-  .menuList {
-    gap: 3rem;
-    padding-right: 3.5rem;
-  }
+  .menuLink    { font-size: 1.5rem; }
+  .logo        { width: 10rem; }
+  .iconButton img { height: 1.75rem; }
+  .menuList    { gap: 3rem; }
 }

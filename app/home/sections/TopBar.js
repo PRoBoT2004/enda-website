@@ -1,3 +1,4 @@
+// app/components/TopBar/TopBar.js
 'use client'
 import styles from './TopBar.module.css'
 import Image from 'next/image'
@@ -5,19 +6,20 @@ import Image from 'next/image'
 export default function TopBar() {
     return (
         <div className={styles.background}>
-            {/* Left: Sign up text with arrow */}
+
+            {/* Left: Sign up + arrow */}
             <div className={styles.leftContent}>
-                <span className={styles.signUpText}>SIGN UP & GET 10% OFF</span>
+                <span className={styles.signUpText}>SIGN UP &amp; GET 10% OFF</span>
                 <Image
                     className={styles.arrowIcon}
                     src="/images/Topbar/group-2.svg"
                     alt=""
-                    width={24}
-                    height={24}
+                    width={10}
+                    height={6}
                 />
             </div>
 
-            {/* Center: Promo text */}
+            {/* Center: Promo */}
             <div className={styles.centerContent}>
                 <span className={styles.promoText}>
                     Buy 2, Save an extra 20%! Exclusive Offer on Curated Picks this March!
@@ -29,7 +31,6 @@ export default function TopBar() {
                 <span className={styles.navLink}>Help</span>
                 <span className={styles.navLink}>Order Tracking</span>
                 <span className={styles.navLink}>Join The Club</span>
-
                 <div className={styles.flagWrapper}>
                     <Image
                         src="/images/Topbar/flag.svg"
@@ -40,6 +41,7 @@ export default function TopBar() {
                     />
                 </div>
             </div>
+
         </div>
     )
 }

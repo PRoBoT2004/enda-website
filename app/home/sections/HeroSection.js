@@ -1,11 +1,19 @@
+// app/home/sections/HeroSection.js
 'use client'
 import styles from './HeroSection.module.css'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
+
+const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 28 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.75, ease: [0.25, 0.1, 0.25, 1], delay },
+})
 
 export default function HeroSection() {
     return (
         <>
-            {/* ── DESKTOP HERO: full viewport, text overlaid ── */}
+            {/* ── DESKTOP: full viewport, text overlaid ── */}
             <section className={styles.heroDesktop}>
                 <div className={styles.backgroundImage}>
                     <Image
@@ -19,24 +27,21 @@ export default function HeroSection() {
                 <div className={styles.gradient} />
                 <div className={styles.contentContainer}>
                     <div className={styles.textWrapper}>
-                        <h1 className={styles.mainHeading}>
-                            BORN IN KENYA,
-                            <br />
-                            MADE FOR THE WORLD
-                        </h1>
-                        <p className={styles.subheading}>
+                        <motion.h1 className={styles.mainHeading} {...fadeUp(0.1)}>
+                            BORN IN KENYA,<br />MADE FOR THE WORLD
+                        </motion.h1>
+                        <motion.p className={styles.subheading} {...fadeUp(0.3)}>
                             Performance, Culture, and Community in Every Step.
-                        </p>
+                        </motion.p>
                     </div>
-                    <a href="/collection" className={styles.ctaLink}>
+                    <motion.a href="/collection" className={styles.ctaLink} {...fadeUp(0.5)}>
                         <span className={styles.ctaText}>Explore Collection</span>
-                    </a>
+                    </motion.a>
                 </div>
             </section>
 
-            {/* ── MOBILE HERO: image on top, black text block below ── */}
+            {/* ── MOBILE: image on top, text block below, gradient bridges the gap ── */}
             <section className={styles.heroMobile}>
-                {/* Full image — contain so nothing is cropped */}
                 <div className={styles.mobileImageWrapper}>
                     <Image
                         src="/images/hero/hero-background.png"
@@ -46,20 +51,16 @@ export default function HeroSection() {
                         priority
                     />
                 </div>
-
-                {/* Black content block — blends seamlessly with image bg */}
                 <div className={styles.mobileContent}>
-                    <h1 className={styles.mobileHeading}>
-                        BORN IN KENYA,
-                        <br />
-                        MADE FOR THE WORLD
-                    </h1>
-                    <p className={styles.mobileSubheading}>
+                    <motion.h1 className={styles.mobileHeading} {...fadeUp(0.1)}>
+                        BORN IN KENYA,<br />MADE FOR THE WORLD
+                    </motion.h1>
+                    <motion.p className={styles.mobileSubheading} {...fadeUp(0.25)}>
                         Performance, Culture, and Community in Every Step.
-                    </p>
-                    <a href="/collection" className={styles.mobileCtaLink}>
+                    </motion.p>
+                    <motion.a href="/collection" className={styles.mobileCtaLink} {...fadeUp(0.4)}>
                         <span className={styles.mobileCtaText}>Explore Collection</span>
-                    </a>
+                    </motion.a>
                 </div>
             </section>
         </>

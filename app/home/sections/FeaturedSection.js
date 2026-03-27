@@ -1,10 +1,39 @@
+// app/home/sections/FeaturedSection.js
 'use client'
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './FeaturedSection.module.css'
-import Image from 'next/image'
+
+const products = [
+    {
+        lifestyle: '/images/featured/p1i1.png',
+        shoe: '/images/featured/p1.png',
+        name: 'New Lapatet Women Blue',
+        original: '$120.00',
+        sale: '$70.00',
+        description: 'Made to move with you, offering comfort and flexibility all day.',
+    },
+    {
+        lifestyle: '/images/featured/p2i2.png',
+        shoe: '/images/featured/p2.png',
+        name: 'Iten Men Black',
+        original: '$130.00',
+        sale: '$85.00',
+        description: 'Made to move with you, offering comfort and flexibility all day.',
+    },
+    {
+        lifestyle: '/images/featured/p3i3.png',
+        shoe: '/images/featured/p3.png',
+        name: 'Olkaria Women Red',
+        original: '$140.00',
+        sale: '$90.00',
+        description: 'Made to move with you, offering comfort and flexibility all day.',
+    },
+]
 
 export default function FeaturedSection() {
+    const [active, setActive] = useState(0)
     const sectionRef = useRef(null)
+    const current = products[active]
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -25,62 +54,53 @@ export default function FeaturedSection() {
     return (
         <section className={styles.featuredSection} ref={sectionRef}>
 
-            {/* ── LEFT: Editorial image — fixed size, not full height ── */}
+            {/* LEFT — lifestyle image stack */}
             <div className={styles.left}>
                 <div className={styles.editorialWrapper}>
-                    <Image
-                        src="/images/featured/editorial.png"
-                        alt="ENDA performance footwear"
-                        fill
-                        className={styles.editorialImg}
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    {/* Gradient overlay */}
+                    {products.map((p, i) => (
+                        <img
+                            key={i}
+                            src={p.lifestyle}
+                            alt={p.name}
+                            className={`${styles.editorialImg} ${i === active ? styles.imgActive : ''}`}
+                        />
+                    ))}
                     <div className={styles.editorialOverlay} />
-                    {/* Text bottom left */}
-                    <p className={styles.editorialText}>
-                        Performance-engineered footwear
-                        <br />
-                        designed for speed, comfort, and endurance.
-                    </p>
+                    <p className={styles.editorialText}>{current.description}</p>
                 </div>
             </div>
 
-            {/* ── RIGHT: Product showcase ── */}
+            {/* RIGHT — shoe image + info + dots */}
             <div className={styles.right}>
 
-                {/* Product card — square, gray bg */}
                 <div className={styles.productCard}>
-
-                    {/* Sale tag INSIDE card, top-left, rotated */}
-                    <div className={styles.saleTag}>Sale 60%</div>
-
-                    {/* Shoe image */}
-                    <div className={styles.productImageWrapper}>
-                        <Image
-                            src="/images/featured/product.png"
-                            alt="New Lapatet Women Blue"
-                            fill
-                            className={styles.productImage}
-                            sizes="(max-width: 768px) 100vw, 40vw"
+                    {products.map((p, i) => (
+                        <img
+                            key={i}
+                            src={p.shoe}
+                            alt={p.name}
+                            className={`${styles.productImg} ${i === active ? styles.imgActive : ''}`}
                         />
-                    </div>
+                    ))}
                 </div>
 
-                {/* Product info row */}
                 <div className={styles.productInfo}>
-                    <span className={styles.productName}>New Lapatet women Blue</span>
+                    <span className={styles.productName}>{current.name}</span>
                     <div className={styles.priceWrapper}>
-                        <span className={styles.originalPrice}>$120.00</span>
-                        <span className={styles.salePrice}>$70.00</span>
+                        <span className={styles.originalPrice}>{current.original}</span>
+                        <span className={styles.salePrice}>{current.sale}</span>
                     </div>
                 </div>
 
-                {/* Dot indicators */}
                 <div className={styles.dots}>
-                    <span className={`${styles.dot} ${styles.dotEmpty}`} />
-                    <span className={`${styles.dot} ${styles.dotFilled}`} />
-                    <span className={`${styles.dot} ${styles.dotFilled}`} />
+                    {products.map((_, i) => (
+                        <button
+                            key={i}
+                            className={`${styles.dot} ${i === active ? styles.dotActive : ''}`}
+                            onClick={() => setActive(i)}
+                            aria-label={`Product ${i + 1}`}
+                        />
+                    ))}
                 </div>
 
             </div>
