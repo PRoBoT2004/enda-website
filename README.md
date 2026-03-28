@@ -5,7 +5,7 @@ This is a **production-ready Next.js website** built from your Figma design. It 
 
 ## 🚀 Quick Start
 
-```bash
+```bash 
 cd enda-website
 npm install
 npm run dev
