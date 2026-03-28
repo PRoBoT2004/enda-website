@@ -17,9 +17,9 @@
 }
 
 .text {
-    color: #4d4d4d;
+    color: #f5f5f5;
     text-align: left;
-    font-family: "-", sans-serif;
+    font-family:var(--font-body);
     /* Back to 35px at 1920 — but container is narrower so it wraps to 3 lines */
     font-size: clamp(16px, 1.82vw, 35px);
     line-height: 140%;
@@ -37,8 +37,8 @@
 }
 
 .lightText {
-    font-family: 'Countach-Light', sans-serif;
-    font-weight: 300;
+    font-family:  var(--font-body);
+    font-weight: 400;
 }
 
 /* ============================================

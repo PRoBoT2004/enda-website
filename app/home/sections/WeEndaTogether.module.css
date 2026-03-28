@@ -3,13 +3,37 @@
 .section {
   width: 100%;
   background: #000000;
-  display: block;
-  line-height: 0; /* removes any ghost space below inline img */
+  padding: 4rem 0;
+}
+
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .image {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain; /* full image always visible, never cropped */
+  object-fit: contain;
+}
+
+/* Laptops */
+@media (max-width: 1920px) {
+  .wrapper { max-width: 1300px; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .section { padding: 40px 0; }
+  .wrapper {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 32px 0; }
+  .wrapper { padding: 0 16px; }
 }

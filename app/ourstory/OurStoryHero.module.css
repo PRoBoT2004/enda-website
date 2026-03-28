@@ -58,7 +58,7 @@
 
 .sub {
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+     font-family: 'Play', sans-serif;
     font-size: clamp(0.875rem, 1.25vw, 1.5rem);
     line-height: 1.405;
     font-weight: 400;

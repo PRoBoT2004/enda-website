@@ -6,13 +6,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const menuItems = [
-    { name: 'New Arrivals', href: '/new-arrivals' },
-    { name: "Men's Collection", href: '/mens' },
-    { name: "Women's Collection", href: '/womens' },
-    { name: 'Running Shoes', href: '/running' },
+    { name: 'Men', href: '/mens' },
+    { name: 'Women', href: '/womens' },
+    { name: 'Enda Programs', href: '/enda-programs' },
+    { name: 'Our Impact', href: '/our-impact' },
     { name: 'Our Story', href: '/ourstory' },
-    { name: 'Journal', href: '/journal' },
-    { name: 'Locate a Store', href: '/stores' },
+    { name: 'Shoe Guide', href: '/shoe-guide' },
+    { name: 'Sale', href: '/sale' },
+    { name: 'News', href: '/news' },
 ]
 
 export default function Navigation() {

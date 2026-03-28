@@ -31,7 +31,7 @@
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: 0.9px;
-    color: #4d4d4d;
+    color: var(--color-text-primary);
     text-transform: uppercase;
     margin: 0;
 }
@@ -59,7 +59,7 @@
 .headline {
     font-size: clamp(28px, 2.29vw, 44px);
     line-height: 1;
-    color: #4d4d4d;
+    color: #fff;
     margin: 0;
 }
 
@@ -92,7 +92,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: clamp(16px, 1.25vw, 24px);
     line-height: 1.4;
-    color: #4d4d4d;
+    color: #fff;
     font-weight: 400;
     margin: 0;
 }
@@ -118,12 +118,12 @@
     gap: clamp(8px, 0.6vw, 12px);
 }
 
-.columnTitle {
+.columnTitle {  
     font-family: 'Countach-Regular', sans-serif;
     font-size: clamp(18px, 1.46vw, 28px);
     font-weight: 400;
     line-height: 1;
-    color: #4d4d4d;
+    color: #fff;
     margin: 0;
 }
 
@@ -137,7 +137,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: clamp(14px, 1.25vw, 24px);
     line-height: 1.2;
-    color: #4d4d4d;
+    color: #fff;
     font-weight: 400;
     margin: 0;
 }
@@ -149,7 +149,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: clamp(16px, 1.25vw, 24px);
     line-height: 1.4;
-    color: #4d4d4d;
+    color: #fff;
     font-weight: 400;
     margin: 0;
     margin-top: clamp(12px, 1vw, 20px);

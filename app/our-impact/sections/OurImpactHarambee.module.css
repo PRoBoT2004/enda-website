@@ -1,0 +1,52 @@
+/* app/our-impact/sections/OurImpactHarambee.module.css */
+
+.section {
+    width: 100%;
+    background: #000000;
+    padding: clamp(32px, 3vw, 60px) clamp(20px, 2.6vw, 50px);
+}
+
+
+
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1vw, 20px);
+    max-width: 900px;
+}
+
+.heading {
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(16px, 1.25vw, 24px);
+    font-weight: 400;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.body {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1vw, 20px);
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+    opacity: 0.85;
+}
+
+/* ============================================================
+   MOBILE ≤768px
+   ============================================================ */
+@media (max-width: 768px) {
+    .section { padding: 32px 20px; }
+    .heading { font-size: 16px; }
+    .body { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    .heading { font-size: 15px; }
+    .body { font-size: 13px; }
+}

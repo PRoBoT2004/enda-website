@@ -4,11 +4,13 @@ import styles from './WeEndaTogether.module.css'
 export default function WeEndaTogether() {
     return (
         <section className={styles.section}>
-            <img
-                src="/images/weenda/we-enda-together.png"
-                alt="We Enda Together"
-                className={styles.image}
-            />
+            <div className={styles.wrapper}>
+                <img
+                    src="/images/weenda/we-enda-together.png"
+                    alt="We Enda Together"
+                    className={styles.image}
+                />
+            </div>
         </section>
     )
 }
