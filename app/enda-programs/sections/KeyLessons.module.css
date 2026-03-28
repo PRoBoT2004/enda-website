@@ -1,0 +1,122 @@
+/* app/enda-programs/sections/KeyLessons.module.css */
+
+.section {
+    width: 100%;
+    background: #0a0a0a;
+    padding: clamp(24px, 2.5vw, 48px) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.2vw, 20px);
+}
+
+/* ── Label ─────────────────────────────────────────────────── */
+.label {
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(14px, 1.1vw, 20px);
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: none;
+    margin: 0;
+    padding: 0 clamp(20px, 2.6vw, 50px);
+    line-height: 1.3;
+}
+
+/* ── Two-panel grid ─────────────────────────────────────────── */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    width: 100%;
+    position: relative;
+}
+
+/* ── Individual panel ───────────────────────────────────────── */
+.panel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.05;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* gradient fade at bottom so caption is always readable */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(0, 0, 0, 0.72) 100%
+    );
+    pointer-events: none;
+}
+
+/* ── Caption ────────────────────────────────────────────────── */
+.caption {
+    position: absolute;
+    bottom: clamp(16px, 2.5vw, 40px);
+    left: clamp(16px, 2.5vw, 40px);
+    right: clamp(16px, 2.5vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 0.4vw, 8px);
+}
+
+.captionTitle {
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(16px, 1.6vw, 30px);
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+.captionBody {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.1vw, 20px);
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.45;
+    max-width: 380px;
+}
+
+
+/* ============================================================
+   MOBILE ≤768px  — stack vertically, hide arrow
+   ============================================================ */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .panel {
+        aspect-ratio: 4 / 3;
+    }
+
+    .label {
+        padding: 0 20px;
+    }
+
+    .section {
+        padding-top: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .captionTitle { font-size: 16px; }
+    .captionBody  { font-size: 13px; }
+    .label        { font-size: 14px; }
+}

@@ -1,326 +1,398 @@
-# ENDA Website - Complete Production Workflow
- 
+# ENDA Website
+
 ## 🎯 Project Overview
-This is a **production-ready Next.js website** built from your Figma design. It uses modern best practices for freelance web development.
+We are actively building the frontend for the **Enda Website** using **Next.js 16 (App Router)** and **React 19**. 
 
-## 🚀 Quick Start
+Our current focus is on developing dynamic, component-driven pages such as the **Shoe Guide** and the **Our Impact** sections. We are strictly modularizing our styles using **CSS Modules**, which gives us fine-grained control over individual components while avoiding styling collisions across the broader application.
 
-```bash 
-cd enda-website
-npm install
-npm run dev
+## 📏 Responsiveness Strategy (Fluid Layouts)
+We are expecting and enforcing a **Fluid Responsive Design** across the entire website. 
+
+Instead of relying solely on rigid, hardcoded pixel breakpoints, we are widely implementing the CSS `clamp()` function. This applies to:
+- **Typography:** Fonts smoothly scale up and down based on viewport width (e.g., `clamp(14px, 1.35vw, 26px)`).
+- **Spacing & Layout:** Paddings, margins, flex gaps, and component widths dynamically adjust to browser dimensions.
+
+To ensure perfect rendering on extremely small devices, we complement the fluid design with traditional media queries (e.g., `@media (max-width: 768px)` and `@media (max-width: 480px)`). This establishes a "zoom-proof", mobile-friendly experience that avoids the awkward layout shifting commonly found in breakpoint-only designs.
+
+## ✨ Visual Animations & Interactions
+Our ongoing animation approach relies on rich, scroll-driven visual feedback to keep the interface engaging but highly performant:
+- **Sticky CSS Interactions (Parallax-like):** We are heavily utilizing `position: sticky` and extended wrapper heights (e.g., `height: 200vh`) to create sections where underlying imagery remains fixed while foreground content seamlessly scrolls over it. 
+- **Smooth Transitions and Micro-interactions:** We apply subtle CSS transitions for hover states (e.g., scaling images, shifting borders and colors).
+- **Framer Motion:** Used modularly alongside our CSS to manage complex mount/unmount animations and viewport-triggered scroll reveals, ensuring a highly polished, state-of-the-art aesthetic.
+
+---
+
+*This README reflects the current workflow and established technical patterns as of our latest development sessions.*
+
+## Project Stack
+
+| Item | Detail |
+|---|---|
+| Framework | Next.js (App Router) |
+| Styling | CSS Modules (`.module.css` per component) |
+| Animations | Framer Motion |
+| Mode | Dark — no light mode toggle |
+| Base font size | Fluid root scaling (see globals.css) |
+
+---
+
+## Font System
+
+| Font | Usage | File |
+|---|---|---|
+| `Countach-Light` | All headings, nav links, section titles, footer col heads | `/public/fonts/Countach_Light_Regular.otf` |
+| `Countach-Regular` | Hero heading, mobile menu | `/public/fonts/Countach_Regular.otf` |
+| `Play` | All body text, descriptions, prices, captions, CTA text | `/public/fonts/PLAY-REGULAR.TTF` + `PLAY-BOLD.TTF` |
+
+> ⚠️ AvenirNext has been **fully removed** from the project. Do not reintroduce it.
+
+### CSS Variables (globals.css)
+```css
+--font-heading: 'Countach-Light', sans-serif;
+--font-body:    'Play', sans-serif;
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+---
 
-## 📁 Project Structure
+## Color Tokens
+
+```css
+--color-bg-primary:     #000000ff;   /* main page bg */
+--color-bg-secondary:   #000;   /* card / elevated bg */
+--color-bg-tertiary:    #1a1a1a;   /* borders, subtle bg */
+--color-text-primary:   #fff;   /* headings */
+--color-text-secondary: #ffffffff;   /* body / muted */
+--color-accent:         #c8a96e;   /* brand gold */
+--color-accent-hover:   #d4b97e;
+--color-border:         #000;
+```
+
+---
+
+## Responsive Sizing Strategy
 
 ```
-enda-website/
-├── app/
-│   ├── page.js          # Homepage (main entry)
-│   ├── layout.js        # Root layout with metadata
-│   └── globals.css      # Global styles
+Desktop  → rem units  (inherits compensated root from globals.css)
+Mobile   → px units   (root locked at 16px, immune to DPI changes)
+```
+
+### Root Font Size Compensation (globals.css)
+```css
+/* 100% zoom */
+@media (min-width: 769px) {
+  :root { font-size: clamp(14px, 0.9375vw, 18px); }
+}
+/* 125% Windows zoom — compensated */
+@media (min-width: 769px) and (min-resolution: 120dpi) and (max-resolution: 143dpi) {
+  :root { font-size: clamp(14px, 1.1vw, 18px); }
+}
+/* 150% Windows zoom — compensated */
+@media (min-width: 769px) and (min-resolution: 144dpi) and (max-resolution: 167dpi) {
+  :root { font-size: clamp(13px, 1.25vw, 17px); }
+}
+```
+
+### Breakpoints Used
+| Breakpoint | Target |
+|---|---|
+| `max-width: 1366px` | Laptops |
+| `max-width: 1024px` | Small laptops / large tablets |
+| `max-width: 768px` | Mobile — switch to px units |
+| `max-width: 480px` | Small phones |
+| `min-width: 2560px` | 4K / ultrawide |
+
+---
+
+## File Structure
+
+```
+app/
+├── home/
+│   ├── sections/
+│   │   ├── HeroSection.js
+│   │   ├── HeroSection.module.css
+│   │   ├── ShopSection.js
+│   │   ├── ShopSection.module.css
+│   │   ├── ShowcaseSection.js
+│   │   ├── ShowcaseSection.module.css
+│   │   ├── FeaturedSection.js
+│   │   ├── FeaturedSection.module.css
+│   │   ├── EditorialSection.js
+│   │   ├── EditorialSection.module.css
+│   │   ├── WeEndaTogether.js
+│   │   └── WeEndaTogether.module.css
+│   ├── page.js
+│   └── styles.module.css
 ├── components/
-│   ├── PromoBar.js      # Top promotional banner
-│   ├── Navigation.js    # Sticky navigation with search/cart
-│   ├── Hero.js          # Hero section with parallax
-│   ├── ProductSection.js # Product category cards
-│   ├── StorySection.js  # About/story split section
-│   ├── AthletesSection.js # Athletes & partners grid
-│   ├── JournalSection.js # Blog/journal cards
-│   └── Footer.js        # Multi-column footer
-└── public/              # Static assets (images, fonts)
+│   ├── TopBar/
+│   │   ├── TopBar.js
+│   │   └── TopBar.module.css
+│   ├── Navigation/
+│   │   ├── Navigation.js
+│   │   └── Navigation.module.css
+│   └── Footer/
+│       ├── Footer.js
+│       └── Footer.module.css
+├── globals.css
+├── layout.js
+└── page.js
 ```
 
-## 🎨 Tech Stack
+---
 
-- **Framework:** Next.js 14 (App Router)
-- **Language:** JavaScript (easy to learn, fast prototyping)
-- **Styling:** Tailwind CSS (utility-first, no switching files)
-- **Animations:** Framer Motion (smooth, professional)
-- **Icons:** Lucide React (lightweight, customizable)
-- **Hosting:** Vercel (recommended - one-click deploy)
+## Image Paths Reference
 
-## 💡 Why This Stack?
-
-### JavaScript over TypeScript (For Now)
-- ✅ **Faster development** - No type errors slowing you down
-- ✅ **Easier for clients** - Most can modify JS, not TS
-- ✅ **Learn gradually** - Add TypeScript later when comfortable
-- ✅ **Better for freelancing** - Ship faster, iterate quicker
-
-### Next.js Benefits
-- Server-side rendering (better SEO)
-- Image optimization (faster loads)
-- File-based routing (intuitive)
-- Production optimizations built-in
-
-### Tailwind CSS Benefits
-- Style directly in JSX (no CSS files to switch to)
-- Responsive design with simple prefixes (md:, lg:)
-- Consistent design system
-- Faster than writing custom CSS
-
-## 🔄 Your Reusable Workflow
-
-### For ANY Future Design (6-7 pages or more):
-
-#### Step 1: Setup (5 min)
-```bash
-npx create-next-app@latest project-name --js
-cd project-name
-npm install framer-motion lucide-react
+```
+/public/images/
+├── hero/
+│   └── hero-background.png
+├── shop/
+│   ├── trainer.png
+│   ├── jogging.png
+│   └── running.png
+├── showcase/
+│   ├── x1.png          ← lifestyle image (product 1)
+│   ├── x1-shoe.png     ← shoe image (product 1)
+│   ├── x2.png
+│   ├── x2-shoe.png
+│   ├── x3.png
+│   └── x3-shoe.png
+├── featured/
+│   ├── p1i1.png        ← lifestyle left (product 1)
+│   ├── p1.png          ← shoe (product 1)
+│   ├── p2i2.png
+│   ├── p2.png
+│   ├── p3i3.png
+│   └── p3.png
+├── editorial/
+│   ├── editorial-1.png ← Our Story card
+│   ├── editorial-2.png ← Our Community card
+│   └── editorial-3.png ← Journal card
+├── weenda/
+│   └── we-enda-together.png
+├── navigation/
+│   ├── logo.png
+│   ├── search-icon.svg
+│   ├── user-icon.svg
+│   └── cart-icon.svg
+├── footer/
+│   ├── logo.png
+│   ├── bcorp.png
+│   ├── visa.svg
+│   ├── mastercard.svg
+│   ├── amex.svg
+│   ├── paypal.svg
+│   ├── diners.svg
+│   └── discover.svg
+└── topbar/
+    ├── group-2.svg     ← arrow icon
+    └── flag.svg        ← Kenya flag
 ```
 
-#### Step 2: Create Component Structure (10 min)
-```
-components/
-├── Navigation.js    # Copy from this project
-├── Hero.js          # Customize text/images
-├── Footer.js        # Copy from this project
-└── [CustomSection].js # Build new sections
-```
+---
 
-#### Step 3: Build Sections (30-60 min per page)
-- Break Figma design into sections
-- Copy similar components from this project
-- Customize text, images, colors
-- Use Framer Motion for animations
+## Home Page — Section Order
 
-#### Step 4: Deploy (5 min)
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-# Push to GitHub
-# Connect to Vercel
-# Deploy automatically
-```
-
-## 🎨 Component Patterns You Can Reuse
-
-### 1. Hero Section Pattern
 ```jsx
-<section className="relative h-screen">
-  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-    {/* Content */}
-  </motion.div>
-</section>
-```
+// app/home/page.js
+import TopBar        from '@/components/TopBar/TopBar'
+import Navigation    from '@/components/Navigation/Navigation'
+import HeroSection   from './sections/HeroSection'
+import ShopSection   from './sections/ShopSection'
+import ShowcaseSection from './sections/ShowcaseSection'
+import FeaturedSection from './sections/FeaturedSection'
+import EditorialSection from './sections/EditorialSection'
+import WeEndaTogether from './sections/WeEndaTogether'
+import Footer        from '@/components/Footer/Footer'
 
-### 2. Card Grid Pattern
-```jsx
-<div className="grid md:grid-cols-3 gap-8">
-  {items.map((item) => (
-    <motion.div whileHover={{ scale: 1.05 }}>
-      {/* Card content */}
-    </motion.div>
-  ))}
-</div>
-```
-
-### 3. Split Section Pattern
-```jsx
-<div className="grid lg:grid-cols-2 gap-12">
-  <div>{/* Text content */}</div>
-  <div>{/* Image */}</div>
-</div>
-```
-
-## 🔥 Key Features Implemented
-
-### ✅ Responsive Design
-- Mobile-first approach
-- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
-
-### ✅ Smooth Animations
-- Page scroll animations (whileInView)
-- Hover effects (scale, translate)
-- Parallax scrolling in hero
-- Smooth page transitions
-
-### ✅ Performance Optimized
-- Next.js automatic code splitting
-- Image optimization ready (use next/image)
-- Font optimization (next/font)
-
-### ✅ SEO Ready
-- Metadata in layout.js
-- Semantic HTML
-- Alt tags for images (add these)
-
-## 🎯 How to Customize for Your Next Project
-
-### Change Colors
-Edit Tailwind classes:
-```jsx
-// Current: bg-blue-600
-// Change to: bg-purple-600, bg-green-600, etc.
-```
-
-### Add New Sections
-1. Create new component file
-2. Follow this structure:
-```jsx
-'use client'
-import { motion } from 'framer-motion'
-
-export default function NewSection() {
+export default function HomePage() {
   return (
-    <section className="py-20">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        {/* Your content */}
-      </motion.div>
+    <>
+      <TopBar />
+      <Navigation />
+      <main>
+        <HeroSection />
+        <ShopSection />
+        <ShowcaseSection />
+        <FeaturedSection />
+        <EditorialSection />
+        <WeEndaTogether />
+      </main>
+      <Footer />
+    </>
+  )
+}
+```
+
+---
+
+## ⭐ Known Issues (Fix Before Launch)
+
+### 1. FeaturedSection — Stacked Image Carousel
+**Problem:** Next.js `<Image fill>` with multiple stacked images inside a single
+container does not position reliably. Images were not filling the container correctly.
+
+**Fix applied:** Replaced `next/image` with plain `<img>` tags + explicit CSS:
+```css
+.productImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.imgActive {
+  opacity: 1;
+  transform: scale(1);
+}
+```
+**Status:** Needs visual QA with real product images.
+
+---
+
+### 2. EditorialSection — Mobile Image Cropping ⭐
+**Problem:** Cards stack vertically at fixed `280px` height on mobile. 
+Depending on the editorial images (portrait vs landscape), the crop may 
+look off — subject might be cut from frame.
+
+**Fix needed:** Once real editorial images are added, adjust per-card 
+`object-position` if needed, or change mobile card height to better 
+suit the image ratio:
+```css
+/* In EditorialSection.module.css — mobile override */
+@media (max-width: 768px) {
+  .card { height: 320px; } /* increase if images feel cropped */
+
+  /* Or target individual cards */
+  .card:nth-child(2) .image {
+    object-position: center 30%;
+  }
+}
+```
+**Status:** ⚠️ Review with real images before launch.
+
+---
+
+## Starting OurStory Page — Dark Mode
+
+### Step 1 — Create the folder structure
+```
+app/
+└── ourstory/
+    ├── page.js
+    ├── styles.module.css
+    └── sections/
+        ├── OurStoryHero.js
+        ├── OurStoryHero.module.css
+        └── ... (one .js + one .module.css per section)
+```
+
+### Step 2 — Base page.js
+```jsx
+// app/ourstory/page.js
+import styles from './styles.module.css'
+import OurStoryHero from './sections/OurStoryHero'
+// import more sections as built...
+
+export default function OurStoryPage() {
+  return (
+    <main className={styles.page}>
+      <OurStoryHero />
+      {/* add sections here as they are built */}
+    </main>
+  )
+}
+```
+
+### Step 3 — Base styles.module.css
+```css
+/* app/ourstory/styles.module.css */
+.page {
+  width: 100%;
+  background: #0a0a0a;
+  min-height: 100vh;
+}
+```
+
+### Step 4 — Section template to follow
+Every new section follows this exact pattern:
+```jsx
+// app/ourstory/sections/OurStoryHero.js
+'use client'
+import { useEffect, useRef } from 'react'
+import styles from './OurStoryHero.module.css'
+
+export default function OurStoryHero() {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add(styles.visible)
+            observer.unobserve(e.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section className={styles.section} ref={ref}>
+      {/* section content */}
     </section>
   )
 }
 ```
-3. Import in page.js
 
-### Add New Pages
-```bash
-app/
-├── about/
-│   └── page.js
-├── products/
-│   └── page.js
-└── contact/
-    └── page.js
-```
+```css
+/* app/ourstory/sections/OurStoryHero.module.css */
+.section {
+  width: 100%;
+  background: #0a0a0a;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
 
-## 🚀 Deployment Options
-
-### Vercel (Recommended - FREE)
-1. Push code to GitHub
-2. Go to vercel.com
-3. Import repository
-4. Deploy (automatic)
-
-### Netlify (Alternative)
-1. Push code to GitHub
-2. Go to netlify.com
-3. Import repository
-4. Deploy
-
-## 📚 What to Learn Next
-
-### Immediate (Week 1-2)
-1. **Tailwind CSS basics** - 2 hours
-   - https://tailwindcss.com/docs
-   - Practice: Build 3 sections using only Tailwind
-
-2. **Framer Motion basics** - 2 hours
-   - https://www.framer.com/motion/
-   - Practice: Add animations to 5 different elements
-
-3. **Next.js routing** - 1 hour
-   - https://nextjs.org/docs/app/building-your-application/routing
-   - Practice: Create 3 new pages
-
-### Short-term (Month 1)
-1. **React hooks** (useState, useEffect, useRef)
-2. **API integration** (fetching data)
-3. **Form handling** (contact forms, search)
-
-### Long-term (Month 2-3)
-1. **TypeScript basics** (gradual migration)
-2. **State management** (Zustand or Context API)
-3. **CMS integration** (Sanity or Contentful)
-
-## 💰 Freelancing Tips
-
-### Pricing Strategy
-- **Simple 1-3 page site:** $500-$1,500
-- **Medium 5-7 page site:** $2,000-$5,000
-- **Complex 10+ page site:** $5,000-$15,000
-
-### Speed = Profit
-With this template, you can build:
-- 1-3 pages in 1-2 days
-- 5-7 pages in 3-5 days
-- 10+ pages in 1-2 weeks
-
-### Quality Checklist Before Delivery
-- [ ] Mobile responsive (test on phone)
-- [ ] All links work
-- [ ] Images optimized
-- [ ] Fast load time (Lighthouse score >90)
-- [ ] Contact form works
-- [ ] Analytics installed (Google Analytics)
-- [ ] SEO metadata complete
-
-## 🛠 Useful Commands
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Check for errors
-```
-
-## 📞 Adding 3D Shoe Viewer (Advanced)
-
-### Option 1: Spline (Easiest)
-1. Design 3D shoe in Spline
-2. Export as React component
-3. Replace placeholder in page.js
-
-### Option 2: Three.js (More Control)
-```bash
-npm install three @react-three/fiber @react-three/drei
-```
-
-## 🎨 Color Customization Guide
-
-Current brand colors:
-- Primary: Blue (blue-600)
-- Secondary: Purple (purple-600)
-- Accent: Pink (pink-600)
-
-To change site-wide:
-- Find all `bg-blue-600` → replace with your color
-- Find all `text-blue-600` → replace with your color
-
-## 🔍 SEO Optimization
-
-Add to each page:
-```jsx
-export const metadata = {
-  title: 'Your Page Title',
-  description: 'Your page description',
-  openGraph: {
-    images: ['/og-image.jpg'],
-  },
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 ```
 
-## 📱 Testing Checklist
+---
 
-- [ ] Test on mobile (Chrome DevTools)
-- [ ] Test on tablet
-- [ ] Test on desktop
-- [ ] Test all links
-- [ ] Test form submissions
-- [ ] Check page load speed
-- [ ] Check animations smoothness
+## How to Start Next Chat
+
+Paste this at the top:
+
+```
+I'm building the Enda website in Next.js (App Router).
+Home page is DONE in dark mode. Read the README for full context.
+
+Next: OurStory page — dark mode, same conventions.
+- All headings: Countach-Light
+- Body text: Play
+- Background: #0a0a0a
+- Same responsive strategy: rem on desktop, px on mobile
+- Same breakpoints: 480 / 768 / 1024 / 1366 / 2560
+
+Here is the first OurStory section:
+- Screenshot: [attach]
+- Rough HTML/CSS: [paste]
+
+Deliver: OurStoryHero.js + OurStoryHero.module.css
+```
 
 ---
 
-## 🎉 You're Ready!
-
-This template gives you everything to build **production-quality websites fast**.
-
-**Next Steps:**
-1. Finish this project
-2. Deploy to Vercel
-3. Take on your first freelance project
-4. Use this as your starting template
-
-**Remember:** Speed + Quality = More Projects = More Money
-
-Good luck! 🚀
+*Last updated: Home Page Complete — Session 2*

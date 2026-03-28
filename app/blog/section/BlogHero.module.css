@@ -1,0 +1,61 @@
+/* app/blog/sections/BlogHero.module.css */
+
+.section {
+    width: 100%;
+    background: #0a0a0a;
+    padding: clamp(48px, 5vw, 96px) clamp(20px, 8vw, 160px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(12px, 1.2vw, 20px);
+    text-align: center;
+}
+
+.heading {
+    font-family: 'Countach-Regular', sans-serif;
+    font-size: clamp(36px, 3.95vw, 76px);
+    font-weight: 400;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin: 0;
+}
+
+.subheading {
+    font-family: 'Countach-Light', sans-serif;
+    font-size: clamp(14px, 1.35vw, 26px);
+    font-weight: 400;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.body {
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.25vw, 22px);
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 680px;
+    opacity: 0.85;
+}
+
+.body strong { font-weight: 700; opacity: 1; }
+
+/* ============================================================
+   MOBILE ≤768px
+   ============================================================ */
+@media (max-width: 768px) {
+    .section { padding: 48px 20px; }
+    .heading { font-size: 36px; }
+    .subheading { font-size: 14px; }
+    .body { font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+    .heading { font-size: 28px; }
+}

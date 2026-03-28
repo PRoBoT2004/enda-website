@@ -13,7 +13,7 @@ const menuItems = [
     { name: 'Our Story', href: '/ourstory' },
     { name: 'Shoe Guide', href: '/shoe-guide' },
     { name: 'Sale', href: '/sale' },
-    { name: 'News', href: '/news' },
+    { name: 'News', href: '/blog' },
 ]
 
 export default function Navigation() {

@@ -1,0 +1,102 @@
+/* app/blog/sections/BlogGrid.module.css */
+
+.section {
+    width: 100%;
+    background: #0a0a0a;
+    padding: clamp(40px, 4vw, 80px) clamp(20px, 2.6vw, 50px);
+}
+
+/* ── 3-col grid ─────────────────────────────────────────────── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(24px, 2.5vw, 48px) clamp(16px, 1.8vw, 32px);
+}
+
+/* ── Card ───────────────────────────────────────────────────── */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.2vw, 20px);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ── Image ──────────────────────────────────────────────────── */
+.imageWrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.04);
+}
+
+/* ── Info ───────────────────────────────────────────────────── */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 0.6vw, 10px);
+}
+
+.title {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.1vw, 20px);
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ── Meta row ───────────────────────────────────────────────── */
+.meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(8px, 0.8vw, 14px);
+    flex-wrap: wrap;
+}
+
+.date {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    font-weight: 400;
+    color: #ffffff;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.tag {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    font-weight: 400;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.tag:hover { opacity: 1; }
+
+/* ============================================================
+   MOBILE ≤768px
+   ============================================================ */
+@media (max-width: 768px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .grid { grid-template-columns: 1fr; }
+}

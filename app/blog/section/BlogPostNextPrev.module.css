@@ -1,0 +1,74 @@
+/* app/blog/[slug]/sections/BlogPostNextPrev.module.css */
+
+.sidebar {
+    position: sticky;
+    top: clamp(20px, 2vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 3vw, 56px);
+}
+
+.navBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.navLabel {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
+    opacity: 0.5;
+}
+
+.navCard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.navImageWrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.navImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.navCard:hover .navImage { transform: scale(1.04); }
+
+.navTitle {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 0.9vw, 16px);
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+
+/* ============================================================
+   MOBILE ≤1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+    .sidebar {
+        position: static;
+        flex-direction: row;
+        gap: 24px;
+    }
+
+    .navBlock { flex: 1; }
+}

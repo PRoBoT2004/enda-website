@@ -1,0 +1,27 @@
+/* app/blog/[slug]/page.module.css */
+
+.page {
+    width: 100%;
+    background: #0a0a0a;
+    min-height: 100vh;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: clamp(140px, 14vw, 220px) 1fr clamp(140px, 14vw, 220px);
+    gap: clamp(24px, 3vw, 56px);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(40px, 4vw, 80px) clamp(20px, 2.6vw, 50px);
+    align-items: start;
+}
+
+/* ============================================================
+   MOBILE ≤1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}

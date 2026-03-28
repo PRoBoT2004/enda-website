@@ -1,0 +1,52 @@
+/* app/enda-programs/sections/ThreeImageBanner.module.css */
+
+.section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+}
+
+.imageWrap {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.imageWrap:hover .image {
+    transform: scale(1.03);
+}
+
+/* ============================================================
+   MOBILE ≤768px — first image full width, two below side by side
+   ============================================================ */
+@media (max-width: 768px) {
+    .section {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .imageWrap:first-child {
+        grid-column: 1 / -1;
+        aspect-ratio: 16 / 9;
+    }
+
+    .imageWrap:not(:first-child) {
+        aspect-ratio: 1 / 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .imageWrap:first-child {
+        aspect-ratio: 4 / 3;
+    }
+}

@@ -1,0 +1,60 @@
+/* app/blog/sections/BlogPagination.module.css */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 1.5vw, 28px);
+    padding: clamp(32px, 3vw, 60px) 0;
+    background: #0a0a0a;
+}
+
+.btn {
+    width: clamp(36px, 3vw, 52px);
+    height: clamp(36px, 3vw, 52px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.2vw, 22px);
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    opacity: 0.7;
+}
+
+.btn:hover { opacity: 1; }
+
+.active {
+    background: #ffffff;
+    color: #000000;
+    font-weight: 700;
+    opacity: 1;
+    border: none;
+}
+
+.ellipsis {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.2vw, 22px);
+    color: #ffffff;
+    opacity: 0.7;
+    letter-spacing: 2px;
+}
+
+.arrow {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: clamp(16px, 1.4vw, 26px);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.arrow:hover { opacity: 1; }

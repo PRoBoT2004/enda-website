@@ -1,0 +1,119 @@
+/* app/blog/[slug]/sections/BlogPostSidebar.module.css */
+
+.sidebar {
+    position: sticky;
+    top: clamp(20px, 2vw, 40px);
+    height: calc(100vh - clamp(40px, 4vw, 80px));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(24px, 2.5vw, 40px);
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────── */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.breadcrumbLink {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.breadcrumbLink:hover { opacity: 1; }
+
+.breadcrumbSep {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    color: #ffffff;
+    opacity: 0.4;
+}
+
+.breadcrumbCurrent {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    color: #ffffff;
+    opacity: 0.6;
+}
+
+/* ── Share ──────────────────────────────────────────────────── */
+.share {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.shareLabel {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
+    opacity: 0.6;
+}
+
+.shareIcons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.shareBtn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: clamp(14px, 1.1vw, 20px);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    text-decoration: none;
+}
+
+.shareBtn:hover { opacity: 1; }
+
+/* ── Tags ───────────────────────────────────────────────────── */
+.tags {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tag {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.tag:hover { opacity: 1; }
+
+/* ============================================================
+   MOBILE ≤1024px — horizontal layout
+   ============================================================ */
+@media (max-width: 1024px) {
+    .sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .shareIcons { flex-direction: row; }
+    .tags { flex-direction: row; flex-wrap: wrap; }
+}

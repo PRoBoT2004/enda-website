@@ -1,0 +1,23 @@
+/* app/products/[slug]/page.module.css */
+
+.page {
+    width: 100%;
+    background: #0a0a0a;
+}
+
+/* ── Sticky PDP grid ────────────────────────────────────────── */
+.pdpGrid {
+    display: grid;
+    grid-template-columns: 1fr clamp(380px, 38vw, 680px);
+    align-items: start;
+    width: 100%;
+}
+
+/* ============================================================
+   MOBILE ≤1024px — stack vertically
+   ============================================================ */
+@media (max-width: 1024px) {
+    .pdpGrid {
+        grid-template-columns: 1fr;
+    }
+}

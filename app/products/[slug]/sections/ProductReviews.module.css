@@ -1,0 +1,353 @@
+/* app/products/[slug]/sections/ProductReviews.module.css */
+
+/* Shared grid — same as PerformanceBenefits */
+:root {
+    --left-col: clamp(200px, 18vw, 345px);
+    --col-gap: clamp(32px, 4vw, 80px);
+    --section-pad-x: clamp(20px, 2.6vw, 50px);
+    --section-pad-y: clamp(40px, 4vw, 80px);
+}
+
+.section {
+    width: 100%;
+    background: #0a0a0a;
+    padding: var(--section-pad-y) var(--section-pad-x);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.divider {
+    width: 100%;
+    height: 1.4px;
+    background: #e1e1e1;
+    margin: clamp(20px, 2vw, 40px) 0;
+}
+
+/* ── Two-col row helper ──────────────────────────────────────── */
+.row {
+    display: grid;
+    grid-template-columns: var(--left-col) 1fr;
+    gap: var(--col-gap);
+    align-items: start;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1.4px solid #e1e1e1;
+    padding-bottom: clamp(16px, 1.6vw, 28px);
+}
+
+.title {
+    font-family: var(--font-body);
+    font-size: clamp(20px, 1.8vw, 35px);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0.01em;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ratingInline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ratingNum {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.4vw, 28px);
+    color: #ffffff;
+}
+
+.chevron { width: 24px; height: 24px; color: #ffffff; }
+
+/* ── Stars ──────────────────────────────────────────────────── */
+.stars, .bigStars, .reviewStars {
+    display: flex;
+    gap: 2px;
+}
+
+.starFilled { color: #ffffff; font-size: clamp(14px, 1.1vw, 20px); }
+.starEmpty  { color: #444444; font-size: clamp(14px, 1.1vw, 20px); }
+
+/* ── Summary left ───────────────────────────────────────────── */
+.summaryLeft {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2vw, 36px);
+}
+
+.bigRating {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bigNum {
+    font-family: var(--font-body);
+    font-size: clamp(48px, 5vw, 80px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.bigStars .starFilled,
+.bigStars .starEmpty { font-size: clamp(18px, 1.6vw, 28px); }
+
+.filterLabel {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 0.9vw, 16px);
+    color: #ffffff;
+    margin: 0 0 clamp(8px, 0.8vw, 14px) 0;
+    opacity: 0.7;
+}
+
+.starBars { display: flex; flex-direction: column; gap: 6px; }
+
+.starBarRow { display: flex; align-items: center; gap: 6px; }
+
+.starBarNum {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    color: #ffffff;
+    width: 14px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.starIcon { color: #ffffff; font-size: clamp(13px, 1vw, 18px); flex-shrink: 0; }
+
+.barTrack {
+    flex: 1;
+    height: 8px;
+    background: #333333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.barFill { height: 100%; background: #ffffff; border-radius: 10px; }
+
+/* ── Summary right — attribute sliders ─────────────────────── */
+.summaryRight {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2vw, 36px);
+}
+
+.attrRow { display: flex; flex-direction: column; gap: 8px; }
+
+.attrLabel {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    color: #ffffff;
+    margin: 0;
+}
+
+.attrTrack {
+    width: 100%;
+    height: 10px;
+    background: #333333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.attrFill { height: 100%; background: #ffffff; border-radius: 10px; }
+
+.attrLabels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+/* ── Controls right col ─────────────────────────────────────── */
+.controlsRight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.writeBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1.75px solid #ffffff;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    padding: clamp(12px, 1.2vw, 18px) clamp(20px, 2vw, 36px);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.writeBtn:hover { background: #ffffff; color: #000000; }
+
+.sortWrap { display: flex; align-items: center; gap: 12px; }
+
+.sortLabel {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    color: #ffffff;
+}
+
+.sortBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1.75px solid #ffffff;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    padding: clamp(12px, 1.2vw, 18px) clamp(16px, 1.5vw, 28px);
+    cursor: pointer;
+}
+
+/* ── Review cards ───────────────────────────────────────────── */
+.reviewCard {
+    display: grid;
+    grid-template-columns: var(--left-col) 1fr clamp(100px, 10vw, 180px);
+    gap: var(--col-gap);
+    padding: clamp(20px, 2vw, 36px) 0;
+    border-bottom: 1.4px solid #e1e1e1;
+    align-items: start;
+}
+
+.reviewLeft { display: flex; flex-direction: column; gap: 8px; }
+
+.author {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.verified {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.85vw, 14px);
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.checkIcon { width: 14px; height: 14px; }
+
+.reviewStars { display: flex; gap: 2px; }
+
+.reviewCenter { display: flex; flex-direction: column; gap: clamp(8px, 0.8vw, 14px); }
+
+.reviewTitle {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.reviewBody {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.55;
+    opacity: 0.85;
+}
+
+.reviewFooter { display: flex; align-items: center; gap: clamp(10px, 1vw, 16px); }
+
+.helpful {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 0.9vw, 15px);
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.thumbBtn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: clamp(12px, 0.9vw, 15px);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.thumbBtn:hover { opacity: 1; }
+
+.reportBtn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: clamp(12px, 0.9vw, 15px);
+    cursor: pointer;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.reviewRight { display: flex; justify-content: flex-end; }
+
+.reviewDate {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 0.9vw, 15px);
+    color: #ffffff;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+/* ── Read more ──────────────────────────────────────────────── */
+.readMoreRight {
+    display: flex;
+}
+
+.readMoreBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1.75px solid #ffffff;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 18px);
+    font-weight: 500;
+    padding: clamp(14px, 1.4vw, 22px) clamp(40px, 5vw, 80px);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.readMoreBtn:hover { background: #ffffff; color: #000000; }
+
+/* ============================================================
+   MOBILE ≤768px
+   ============================================================ */
+@media (max-width: 768px) {
+    .row { grid-template-columns: 1fr; }
+    .reviewCard { grid-template-columns: 1fr; }
+    .controlsRight { flex-direction: column; align-items: flex-start; }
+    .reviewRight { justify-content: flex-start; }
+}

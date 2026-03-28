@@ -1,0 +1,176 @@
+/* app/products/[slug]/sections/SizeGuideModal.module.css */
+
+/* ── Backdrop ───────────────────────────────────────────────── */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.backdropVisible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ── Slide-in panel ─────────────────────────────────────────── */
+.panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: clamp(320px, 36vw, 480px);
+    height: 100vh;
+    background: #000000;
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.panel::-webkit-scrollbar { display: none; }
+
+.panelOpen {
+    transform: translateX(0);
+}
+
+/* ── Close button ───────────────────────────────────────────── */
+.closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #282828;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 1;
+}
+
+.closeBtn:hover { background: #3a3a3a; }
+
+.closeIcon {
+    width: 22px;
+    height: 22px;
+    color: #ffffff;
+}
+
+/* ── Content ────────────────────────────────────────────────── */
+.content {
+    padding: clamp(40px, 4vw, 64px) clamp(24px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2vw, 32px);
+}
+
+.title {
+    font-family: var(--font-body);
+    font-size: clamp(20px, 1.8vw, 28px);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* ── Toggle ─────────────────────────────────────────────────── */
+.toggle {
+    display: flex;
+    border: 1px solid #c5c5c5;
+    width: fit-content;
+}
+
+.toggleBtn {
+    padding: clamp(10px, 1vw, 16px) clamp(24px, 2.5vw, 40px);
+    background: transparent;
+    border: none;
+    color: #888888;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 16px);
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.toggleActive {
+    background: #ffffff;
+    color: #000000;
+    font-weight: 700;
+}
+
+/* ── Table ──────────────────────────────────────────────────── */
+.tableWrap {
+    border: 1.4px solid #4d4d4d;
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.th {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 16px);
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    padding: clamp(10px, 1vw, 14px) 8px;
+    background: #181818;
+    border-bottom: 1px solid #343434;
+}
+
+.th:first-child { text-align: center; }
+
+.rowDark  { background: #000000; }
+.rowLight { background: #181818; }
+
+.td {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 16px);
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    padding: clamp(10px, 1vw, 14px) 8px;
+    border-top: 1px solid #343434;
+}
+
+.tdBold { font-weight: 700; }
+
+/* ── Fit guide ──────────────────────────────────────────────── */
+.fitGuide {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fitTitle {
+    font-family: var(--font-body);
+    font-size: clamp(18px, 1.5vw, 24px);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.fitText {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1vw, 16px);
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+/* ============================================================
+   MOBILE ≤480px
+   ============================================================ */
+@media (max-width: 480px) {
+    .panel { width: 100vw; }
+}
