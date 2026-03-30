@@ -21,7 +21,7 @@
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: #ffffff;
+    background: #1f1f1f;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +50,7 @@
 .imgWrapSmall,
 .imgWrapWide {
     overflow: hidden;
-    background: #ffffff;
+    background: #1f1f1f;
     height: 100%;
 }
 
@@ -74,7 +74,7 @@
     width: 100%;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: #ffffff;
+    background: #1f1f1f;
 }
 
 .imgWrapFull .image {

@@ -172,5 +172,5 @@ export const blogPosts = [
 ]
 
 export function getBlogPostBySlug(slug) {
-    return blogPosts.find((p) => p.slug === slug) ?? null
+    return blogPosts.find((p) => p.slug === slug) ?? blogPosts[0]
 }

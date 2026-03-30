@@ -10,6 +10,7 @@ import WeEndaTogether from './sections/WeEndaTogether'
 // import InfoSection from './sections/InfoSection'
 import Footer from './sections/Footer'
 
+
 export const metadata = {
     title: 'ENDA - Born in Kenya, Made for the World',
     description: 'Performance-engineered footwear designed for speed, comfort, and endurance.',

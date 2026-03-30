@@ -67,8 +67,16 @@
     .sidebar {
         position: static;
         flex-direction: row;
-        gap: 24px;
+        gap: 20px;
+        padding-top: 32px;
+        border-top: 1px solid #1a1a1a;
+        margin-top: 8px;
     }
 
     .navBlock { flex: 1; }
+}
+
+@media (max-width: 480px) {
+    .sidebar { flex-direction: column; }
+    .navBlock { width: 100%; }
 }

@@ -6,8 +6,8 @@ import { products } from '../../data/products'
 import styles from './page.module.css'
 
 export default function WomensPage() {
-    // Filter for women's products
-    const womensProducts = products.filter(p => p.slug.includes('-women-') || p.slug.includes('women'))
+    // Filter by gender field
+    const womensProducts = products.filter(p => p.gender === 'women')
     
     return (
         <main className={styles.main}>

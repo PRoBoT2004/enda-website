@@ -17,11 +17,16 @@
 }
 
 /* ============================================================
-   MOBILE ≤1024px
+   TABLET ≤1024px
    ============================================================ */
 @media (max-width: 1024px) {
     .layout {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 0;                      /* we'll control spacing per-section */
+        padding: 32px 20px;
     }
+}
+.contentCol {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,6 +1,5 @@
-// app/components/Navigation/Navigation.js
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './Navigation.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,10 +18,33 @@ const menuItems = [
 export default function Navigation() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const [topbarHidden, setTopbarHidden] = useState(false)
+    const [navHidden, setNavHidden] = useState(false)
+    const lastScrollY = useRef(0)
 
-    // Subtle bg tint on scroll so links stay readable
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 40)
+        const onScroll = () => {
+            const currentY = window.scrollY
+            const topbarPx = 44
+            const firstSection = window.innerHeight // 100vh
+
+            setScrolled(currentY > 40)
+            setTopbarHidden(currentY > topbarPx)
+
+            // Only apply hide/show behavior after 100vh
+            if (currentY > firstSection) {
+                if (currentY > lastScrollY.current) {
+                    setNavHidden(true)   // scrolling down → hide
+                } else {
+                    setNavHidden(false)  // scrolling up → show
+                }
+            } else {
+                setNavHidden(false)  // within first 100vh → always show
+            }
+
+            lastScrollY.current = currentY
+        }
+
         window.addEventListener('scroll', onScroll, { passive: true })
         return () => window.removeEventListener('scroll', onScroll)
     }, [])
@@ -33,9 +55,19 @@ export default function Navigation() {
         return () => { document.body.style.overflow = '' }
     }, [menuOpen])
 
+    // Always show nav when mobile menu is open
+    useEffect(() => {
+        if (menuOpen) setNavHidden(false)
+    }, [menuOpen])
+
     return (
         <>
-            <nav className={`${styles.navigation} ${scrolled ? styles.scrolled : ''}`}>
+            <nav className={`
+                ${styles.navigation}
+                ${scrolled ? styles.scrolled : ''}
+                ${topbarHidden ? styles.topbarHidden : ''}
+                ${navHidden ? styles.navHidden : ''}
+            `}>
 
                 {/* Logo */}
                 <Link href="/" className={styles.logoWrapper}>

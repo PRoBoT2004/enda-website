@@ -1,20 +1,6 @@
-/* app/components/Navigation/Navigation.module.css */
-
-/*
-  SIZING STRATEGY — same rule as TopBar:
-  Desktop  → rem  (scales with compensated root in globals.css)
-  Mobile   → px   (root locked at 16px, immune to DPI changes)
-
-  Nav is position: fixed so it floats above the hero image.
-  TopBar is also fixed, so nav top = topbar height.
-
-  --topbar-h is declared in globals.css :root
-  We add it here too as a fallback.
-*/
-
 :root {
-  --topbar-h: 2.75rem;   /* keep in sync with TopBar min-height */
-  --nav-h:    4.5rem;    /* desktop nav height */
+  --topbar-h: 2.75rem;
+  --nav-h:    4.5rem;
 }
 
 /* ========== NAV SHELL ========== */
@@ -31,14 +17,27 @@
   padding: 0 clamp(1.25rem, 2.5vw, 2.5rem);
   z-index: 1000;
   background: transparent;
-  transition: background 0.35s ease, backdrop-filter 0.35s ease;
+  transition: background 0.35s ease,
+              backdrop-filter 0.35s ease,
+              top 0.25s ease,
+              transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Subtle darkening on scroll — keeps links readable */
+/* Subtle darkening on scroll */
 .navigation.scrolled {
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+/* Snap to top when topbar is scrolled away */
+.navigation.topbarHidden {
+  top: 0;
+}
+
+/* Slide out on scroll down */
+.navigation.navHidden {
+  transform: translateY(-110%);
 }
 
 /* ========== LOGO ========== */
@@ -53,7 +52,7 @@
   width: clamp(4.5rem, 6.8vw, 8.2rem);
   height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* force white on dark bg */
+  filter: brightness(0) invert(1);
 }
 
 /* ========== DESKTOP MENU ========== */
@@ -64,7 +63,7 @@
   margin: 0;
   padding: 0;
   flex: 1;
-  justify-content: center;          /* center nav links between logo + icons */
+  justify-content: center;
   gap: clamp(1rem, 2vw, 2.5rem);
 }
 
@@ -76,7 +75,6 @@
 .menuLink {
   color: #ffffff;
   font-family: 'Countach-Light', sans-serif;
-  /* Figma: 24px at 1920px → 24/1920 = 1.25vw */
   font-size: clamp(0.875rem, 1.25vw, 1.5rem);
   font-weight: 300;
   letter-spacing: 0.01em;
@@ -87,7 +85,6 @@
   transition: opacity 0.2s ease;
 }
 
-/* Underline reveal on hover */
 .menuLink::after {
   content: '';
   position: absolute;
@@ -99,13 +96,8 @@
   transition: width 0.25s ease;
 }
 
-.menuLink:hover {
-  opacity: 0.75;
-}
-
-.menuLink:hover::after {
-  width: 100%;
-}
+.menuLink:hover { opacity: 0.75; }
+.menuLink:hover::after { width: 100%; }
 
 /* ========== ICONS ========== */
 .iconsWrapper {
@@ -127,9 +119,7 @@
   line-height: 0;
 }
 
-.iconButton:hover {
-  opacity: 0.65;
-}
+.iconButton:hover { opacity: 0.65; }
 
 .iconButton img {
   width: auto;
@@ -138,14 +128,9 @@
   filter: brightness(0) invert(1);
 }
 
-/* Hide hamburger on desktop */
-.hamburger { display: none; }
-
-/* Hide mobile menu on desktop */
+.hamburger  { display: none; }
 .mobileMenu { display: none; }
-
-/* Hide backdrop on desktop */
-.backdrop { display: none; }
+.backdrop   { display: none; }
 
 /* ============================================================
    1366px
@@ -153,15 +138,9 @@
 @media (max-width: 1366px) {
   :root { --nav-h: 4.25rem; }
 
-  .menuLink {
-    font-size: clamp(0.8125rem, 1.1vw, 1.25rem);
-  }
-  .logo {
-    width: clamp(4rem, 6vw, 7rem);
-  }
-  .iconButton img {
-    height: clamp(1rem, 1.2vw, 1.35rem);
-  }
+  .menuLink       { font-size: clamp(0.8125rem, 1.1vw, 1.25rem); }
+  .logo           { width: clamp(4rem, 6vw, 7rem); }
+  .iconButton img { height: clamp(1rem, 1.2vw, 1.35rem); }
 }
 
 /* ============================================================
@@ -170,28 +149,15 @@
 @media (max-width: 1024px) {
   :root { --nav-h: 4rem; }
 
-  .navigation {
-    padding: 0 clamp(0.875rem, 2vw, 1.5rem);
-  }
-  .menuList {
-    gap: clamp(0.75rem, 1.5vw, 1.5rem);
-  }
-  .menuLink {
-    font-size: clamp(0.75rem, 1vw, 1.1rem);
-  }
-  .logo {
-    width: clamp(3.5rem, 5vw, 5.5rem);
-  }
-  .iconButton img {
-    height: clamp(0.9rem, 1.1vw, 1.2rem);
-  }
+  .navigation     { padding: 0 clamp(0.875rem, 2vw, 1.5rem); }
+  .menuList       { gap: clamp(0.75rem, 1.5vw, 1.5rem); }
+  .menuLink       { font-size: clamp(0.75rem, 1vw, 1.1rem); }
+  .logo           { width: clamp(3.5rem, 5vw, 5.5rem); }
+  .iconButton img { height: clamp(0.9rem, 1.1vw, 1.2rem); }
 }
 
 /* ============================================================
    MOBILE ≤768px
-   Everything in px. Root is 16px locked.
-   Nav becomes sticky, solid dark bg.
-   Desktop menu hidden → hamburger + fullscreen drawer.
    ============================================================ */
 @media (max-width: 768px) {
   :root {
@@ -215,38 +181,37 @@
     -webkit-backdrop-filter: blur(8px);
   }
 
-  /* Hide desktop menu */
+  .navigation.topbarHidden { top: 0; }
+
+  .navigation.navHidden { transform: translateY(-110%); }
+
   .menuList    { display: none; }
   .desktopOnly { display: none !important; }
 
-  /* Show hamburger */
   .hamburger {
     display: flex;
     width: 44px;
     height: 44px;
     align-items: center;
     justify-content: center;
-    margin-right: -10px; /* optical alignment */
+    margin-right: -10px;
   }
 
-  .logo { width: 72px; }
-
-  .iconsWrapper { gap: 8px; }
-
+  .logo           { width: 72px; }
+  .iconsWrapper   { gap: 8px; }
   .iconButton img { height: 20px; }
 
-  /* ── Mobile fullscreen drawer ── */
+  /* ── Mobile drawer ── */
   .mobileMenu {
     display: block;
     position: fixed;
-    top: calc(40px + 56px); /* topbar + nav */
+    top: calc(40px + 56px);
     left: 0;
     right: 0;
     bottom: 0;
     background: #0a0a0a;
     z-index: 999;
     overflow-y: auto;
-    /* slide in from top */
     transform: translateY(-100%);
     opacity: 0;
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
@@ -270,7 +235,6 @@
 
   .mobileMenuItem {
     border-bottom: 1px solid #1a1a1a;
-    /* staggered entrance */
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.3s ease calc(var(--i) * 0.05s),
@@ -296,11 +260,8 @@
     transition: color 0.2s ease;
   }
 
-  .mobileMenuLink:active {
-    color: #c8a96e;
-  }
+  .mobileMenuLink:active { color: #c8a96e; }
 
-  /* Backdrop */
   .backdrop {
     display: block;
     position: fixed;
@@ -321,15 +282,11 @@
     padding: 0 16px;
   }
 
-  .logo { width: 60px; }
-
-  .iconsWrapper { gap: 6px; }
-
+  .logo           { width: 60px; }
+  .iconsWrapper   { gap: 6px; }
   .iconButton img { height: 18px; }
 
-  .mobileMenu {
-    top: calc(36px + 52px);
-  }
+  .mobileMenu     { top: calc(36px + 52px); }
 
   .mobileMenuLink {
     font-size: 20px;
@@ -343,8 +300,8 @@
 @media (min-width: 2560px) {
   :root { --nav-h: 6rem; }
 
-  .menuLink    { font-size: 1.5rem; }
-  .logo        { width: 10rem; }
+  .menuLink       { font-size: 1.5rem; }
+  .logo           { width: 10rem; }
   .iconButton img { height: 1.75rem; }
-  .menuList    { gap: 3rem; }
+  .menuList       { gap: 3rem; }
 }

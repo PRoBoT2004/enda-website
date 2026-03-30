@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     gap: clamp(24px, 2.5vw, 48px);
+    padding-top: clamp(16px, 2vw, 36px); /* ← pushes content down from the top edge */
 }
 
 /* ── Title block ────────────────────────────────────────────── */

@@ -1,0 +1,118 @@
+/* Desktop — only share bar visible (meta handled by sidebar) */
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.meta { display: none; }  /* hidden on desktop */
+
+.bar {
+    display: none;         /* hidden on desktop too — sidebar handles share */
+}
+
+/* ============================================================
+   MOBILE ≤1024px — everything shows here
+   ============================================================ */
+@media (max-width: 1024px) {
+
+    .meta {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 28px 0 20px 0;
+        border-top: 1px solid #1a1a1a;
+        margin-top: 32px;
+    }
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .breadcrumbLink {
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: #ffffff;
+        text-decoration: none;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+    }
+
+    .breadcrumbLink:hover { opacity: 1; }
+
+    .breadcrumbSep {
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: #ffffff;
+        opacity: 0.4;
+    }
+
+    .breadcrumbCurrent {
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: #ffffff;
+        opacity: 0.6;
+    }
+
+    .tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tag {
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: #ffffff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+    }
+
+    .tag:hover { opacity: 1; }
+
+    .bar {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0 0 0;
+        border-top: 1px solid #1a1a1a;
+    }
+
+    .label {
+        font-family: var(--font-body);
+        font-size: 13px;
+        font-weight: 700;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0;
+        opacity: 0.6;
+    }
+
+    .icons {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .btn {
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 18px;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+        display: flex;
+        align-items: center;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    .btn:hover { opacity: 1; }
+}

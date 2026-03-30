@@ -76,6 +76,7 @@
     display: block;
 }
 
+
 /* ── Shop row ── */
 .shopRow {
     width: 100%;
@@ -150,6 +151,7 @@
    ============================================================ */
 @media (max-width: 1024px) {
     .topRow { grid-template-columns: 1fr; }
+    .diagram { grid-template-columns: 1fr; }   /* ← add this */
     .shopRow { grid-template-columns: 1fr; }
 }
 
@@ -161,7 +163,10 @@
     .title { font-size: 28px; }
     .titleSub { font-size: 14px; }
     .desc { font-size: 15px; }
-    .diagramImg { max-width: 100%; }
+    .diagramImg {
+        grid-column: 1;        /* ← reset from column 2 */
+        max-width: 100%;
+    }
     .descCol { max-width: 100%; }
     .productsRow { grid-template-columns: repeat(2, 1fr); }
 }

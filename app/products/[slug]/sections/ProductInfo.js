@@ -43,7 +43,7 @@ export default function ProductInfo({ product }) {
                                 onClick={() => setSelectedColor(c.name)}
                                 aria-label={c.name}
                             >
-                                <img src={c.swatch} alt={c.name} className={styles.swatchImage} />
+                                <img src={c.swatch || product.images[0]} alt={c.name} className={styles.swatchImage} />
                             </button>
                         ))}
                     </div>
@@ -62,11 +62,11 @@ export default function ProductInfo({ product }) {
                     </div>
 
                     {/* Size guide */}
-                    <button 
+                    <button
                         onClick={(e) => {
                             e.preventDefault();
                             setIsSizeGuideOpen(true);
-                        }} 
+                        }}
                         className={styles.sizeGuide}
                     >
                         Size Guide
@@ -98,9 +98,9 @@ export default function ProductInfo({ product }) {
 
                 </div>
             </div>
-            <SizeGuideModal 
-                isOpen={isSizeGuideOpen} 
-                onClose={() => setIsSizeGuideOpen(false)} 
+            <SizeGuideModal
+                isOpen={isSizeGuideOpen}
+                onClose={() => setIsSizeGuideOpen(false)}
             />
         </>
     )

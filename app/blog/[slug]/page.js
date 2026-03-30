@@ -1,4 +1,3 @@
-// app/blog/[slug]/page.js
 import { getBlogPostBySlug, blogPosts } from '@/data/blogPosts'
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
@@ -9,6 +8,7 @@ import Footer from '@/app/home/sections/Footer'
 import BlogPostSidebar from '../section/BlogPostSidebar'
 import BlogPostContent from '../section/BlogPostContent'
 import BlogPostNextPrev from '../section/BlogPostNextPrev'
+import BlogPostShareBar from '../section/BlogPostShareBar'   // ← new
 
 export async function generateStaticParams() {
     return blogPosts.map((p) => ({ slug: p.slug }))
@@ -24,13 +24,11 @@ export default async function BlogPostPage({ params }) {
             <TopBar />
             <Navigation />
             <div className={styles.layout}>
-                {/* Left sidebar */}
                 <BlogPostSidebar post={post} />
-
-                {/* Center — main content */}
-                <BlogPostContent post={post} />
-
-                {/* Right sidebar — prev/next */}
+                <div className={styles.contentCol}>
+                    <BlogPostContent post={post} />
+                    <BlogPostShareBar post={post} />  {/* mobile share bar */}
+                </div>
                 <BlogPostNextPrev prevPost={post.prevPost} nextPost={post.nextPost} />
             </div>
             <WeEndaTogether />

@@ -1,6 +1,5 @@
 'use client'
 
-// app/blog/[slug]/sections/BlogPostSidebar.js
 import { FaFacebookF, FaInstagram } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 import { FiLink } from 'react-icons/fi'
@@ -10,6 +9,25 @@ export default function BlogPostSidebar({ post }) {
     const handleCopy = () => {
         navigator.clipboard.writeText(window.location.href)
     }
+
+    const ShareIcons = () => (
+        <div className={styles.shareIcons}>
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
+                <FaFacebookF />
+            </a>
+            <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
+                <FaXTwitter />
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
+                <FaInstagram />
+            </a>
+            <button className={styles.shareBtn} onClick={handleCopy} aria-label="Copy link">
+                <FiLink />
+            </button>
+        </div>
+    )
 
     return (
         <aside className={styles.sidebar}>
@@ -29,23 +47,10 @@ export default function BlogPostSidebar({ post }) {
                 ))}
             </div>
 
-            {/* Share — at bottom */}
+            {/* Share — desktop: vertical column, hidden on mobile */}
             <div className={styles.share}>
                 <p className={styles.shareLabel}>Share</p>
-                <div className={styles.shareIcons}>
-                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                        <FaFacebookF />
-                    </a>
-                    <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                        <FaXTwitter />
-                    </a>
-                    <a href={`https://www.instagram.com/`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                        <FaInstagram />
-                    </a>
-                    <button className={styles.shareBtn} onClick={handleCopy} aria-label="Copy link">
-                        <FiLink />
-                    </button>
-                </div>
+                <ShareIcons />
             </div>
         </aside>
     )
